@@ -30,19 +30,19 @@ typedef struct __s_font {
 #endif // __FONT_8_ENABLED__
 
 #if (1 == __FONT_12_ENABLED__ )
-	#include "font8.h"
+	#include "font12.h"
 #endif // __FONT_12_ENABLED__
 
 #if (1 == __FONT_16_ENABLED__ )
-	#include "font8.h"
+	#include "font16.h"
 #endif // __FONT_16_ENABLED__
 
 #if (1 == __FONT_20_ENABLED__ )
-	#include "font8.h"
+	#include "font20.h"
 #endif // __FONT_20_ENABLED__
 
 #if (1 == __FONT_24_ENABLED__ )
-	#include "font8.h"
+	#include "font24.h"
 #endif // __FONT_24_ENABLED__
 
 

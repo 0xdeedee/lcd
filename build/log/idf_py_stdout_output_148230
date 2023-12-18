@@ -1,0 +1,672 @@
+[1/10] Performing build step for 'bootloader'
+[1/1] cd /home/deedee/devel/lcd/build/bootloader/esp-idf/esptool_py && /home/deedee/.espressif/python_env/idf5.2_py3.10_env/bin/python /home/deedee/esp/esp-idf_5_2/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/deedee/devel/lcd/build/bootloader/bootloader.bin
+Bootloader binary size 0x5330 bytes. 0x2cd0 bytes (35%) free.
+[2/8] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/lcd_driver.c.obj
+FAILED: esp-idf/main/CMakeFiles/__idf_main.dir/lcd_driver.c.obj 
+/home/deedee/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/bin/xtensa-esp32s3-elf-gcc -DESP_PLATFORM -DIDF_VER=\"v5.2-dev-2756-g2bc1f2f574-dirty\" -DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\" -DSOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE -DSOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ -DUNITY_INCLUDE_CONFIG_H -D_GLIBCXX_HAVE_POSIX_SEMAPHORE -D_GLIBCXX_USE_POSIX_SEMAPHORE -D_GNU_SOURCE -D_POSIX_READER_WRITER_LOCKS -I/home/deedee/devel/lcd/build/config -I/home/deedee/devel/lcd/main -I/home/deedee/devel/lcd/main/st_2_inch -I/home/deedee/esp/esp-idf_5_2/components/newlib/platform_include -I/home/deedee/esp/esp-idf_5_2/components/freertos/config/include -I/home/deedee/esp/esp-idf_5_2/components/freertos/config/include/freertos -I/home/deedee/esp/esp-idf_5_2/components/freertos/config/xtensa/include -I/home/deedee/esp/esp-idf_5_2/components/freertos/FreeRTOS-Kernel/include -I/home/deedee/esp/esp-idf_5_2/components/freertos/FreeRTOS-Kernel/portable/xtensa/include -I/home/deedee/esp/esp-idf_5_2/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos -I/home/deedee/esp/esp-idf_5_2/components/freertos/esp_additions/include -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/include -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/include/soc -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/include/soc/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/port/esp32s3/. -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/port/esp32s3/private_include -I/home/deedee/esp/esp-idf_5_2/components/heap/include -I/home/deedee/esp/esp-idf_5_2/components/log/include -I/home/deedee/esp/esp-idf_5_2/components/soc/include -I/home/deedee/esp/esp-idf_5_2/components/soc/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/soc/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/hal/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/hal/include -I/home/deedee/esp/esp-idf_5_2/components/hal/platform_port/include -I/home/deedee/esp/esp-idf_5_2/components/esp_rom/include -I/home/deedee/esp/esp-idf_5_2/components/esp_rom/include/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/esp_rom/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/esp_common/include -I/home/deedee/esp/esp-idf_5_2/components/esp_system/include -I/home/deedee/esp/esp-idf_5_2/components/esp_system/port/soc -I/home/deedee/esp/esp-idf_5_2/components/esp_system/port/include/private -I/home/deedee/esp/esp-idf_5_2/components/xtensa/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/xtensa/include -I/home/deedee/esp/esp-idf_5_2/components/xtensa/deprecated_include -I/home/deedee/esp/esp-idf_5_2/components/lwip/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/include/apps -I/home/deedee/esp/esp-idf_5_2/components/lwip/include/apps/sntp -I/home/deedee/esp/esp-idf_5_2/components/lwip/lwip/src/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/freertos/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/esp32xx/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/esp32xx/include/arch -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/esp32xx/include/sys -I/home/deedee/devel/lcd/managed_components/espressif__esp_jpeg/include -I/home/deedee/esp/esp-idf_5_2/components/esp_ringbuf/include -I/home/deedee/esp/esp-idf_5_2/components/efuse/include -I/home/deedee/esp/esp-idf_5_2/components/efuse/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/driver/include -I/home/deedee/esp/esp-idf_5_2/components/driver/deprecated -I/home/deedee/esp/esp-idf_5_2/components/driver/analog_comparator/include -I/home/deedee/esp/esp-idf_5_2/components/driver/dac/include -I/home/deedee/esp/esp-idf_5_2/components/driver/gpio/include -I/home/deedee/esp/esp-idf_5_2/components/driver/gptimer/include -I/home/deedee/esp/esp-idf_5_2/components/driver/i2c/include -I/home/deedee/esp/esp-idf_5_2/components/driver/i2s/include -I/home/deedee/esp/esp-idf_5_2/components/driver/ledc/include -I/home/deedee/esp/esp-idf_5_2/components/driver/mcpwm/include -I/home/deedee/esp/esp-idf_5_2/components/driver/parlio/include -I/home/deedee/esp/esp-idf_5_2/components/driver/pcnt/include -I/home/deedee/esp/esp-idf_5_2/components/driver/rmt/include -I/home/deedee/esp/esp-idf_5_2/components/driver/sdio_slave/include -I/home/deedee/esp/esp-idf_5_2/components/driver/sdmmc/include -I/home/deedee/esp/esp-idf_5_2/components/driver/sigma_delta/include -I/home/deedee/esp/esp-idf_5_2/components/driver/spi/include -I/home/deedee/esp/esp-idf_5_2/components/driver/temperature_sensor/include -I/home/deedee/esp/esp-idf_5_2/components/driver/touch_sensor/include -I/home/deedee/esp/esp-idf_5_2/components/driver/twai/include -I/home/deedee/esp/esp-idf_5_2/components/driver/uart/include -I/home/deedee/esp/esp-idf_5_2/components/driver/usb_serial_jtag/include -I/home/deedee/esp/esp-idf_5_2/components/driver/touch_sensor/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/esp_pm/include -I/home/deedee/esp/esp-idf_5_2/components/mbedtls/port/include -I/home/deedee/esp/esp-idf_5_2/components/mbedtls/mbedtls/include -I/home/deedee/esp/esp-idf_5_2/components/mbedtls/mbedtls/library -I/home/deedee/esp/esp-idf_5_2/components/mbedtls/esp_crt_bundle/include -I/home/deedee/esp/esp-idf_5_2/components/esp_bootloader_format/include -I/home/deedee/esp/esp-idf_5_2/components/esp_app_format/include -I/home/deedee/esp/esp-idf_5_2/components/bootloader_support/include -I/home/deedee/esp/esp-idf_5_2/components/bootloader_support/bootloader_flash/include -I/home/deedee/esp/esp-idf_5_2/components/esp_partition/include -I/home/deedee/esp/esp-idf_5_2/components/app_update/include -I/home/deedee/esp/esp-idf_5_2/components/esp_mm/include -I/home/deedee/esp/esp-idf_5_2/components/spi_flash/include -I/home/deedee/esp/esp-idf_5_2/components/pthread/include -I/home/deedee/esp/esp-idf_5_2/components/esp_timer/include -I/home/deedee/esp/esp-idf_5_2/components/app_trace/include -I/home/deedee/esp/esp-idf_5_2/components/esp_event/include -I/home/deedee/esp/esp-idf_5_2/components/nvs_flash/include -I/home/deedee/esp/esp-idf_5_2/components/esp_phy/include -I/home/deedee/esp/esp-idf_5_2/components/esp_phy/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/vfs/include -I/home/deedee/esp/esp-idf_5_2/components/esp_netif/include -I/home/deedee/esp/esp-idf_5_2/components/wpa_supplicant/include -I/home/deedee/esp/esp-idf_5_2/components/wpa_supplicant/port/include -I/home/deedee/esp/esp-idf_5_2/components/wpa_supplicant/esp_supplicant/include -I/home/deedee/esp/esp-idf_5_2/components/esp_coex/include -I/home/deedee/esp/esp-idf_5_2/components/esp_wifi/include -I/home/deedee/esp/esp-idf_5_2/components/esp_wifi/wifi_apps/include -I/home/deedee/esp/esp-idf_5_2/components/unity/include -I/home/deedee/esp/esp-idf_5_2/components/unity/unity/src -I/home/deedee/esp/esp-idf_5_2/components/cmock/CMock/src -I/home/deedee/esp/esp-idf_5_2/components/console -I/home/deedee/esp/esp-idf_5_2/components/http_parser -I/home/deedee/esp/esp-idf_5_2/components/esp-tls -I/home/deedee/esp/esp-idf_5_2/components/esp-tls/esp-tls-crypto -I/home/deedee/esp/esp-idf_5_2/components/esp_adc/include -I/home/deedee/esp/esp-idf_5_2/components/esp_adc/interface -I/home/deedee/esp/esp-idf_5_2/components/esp_adc/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/esp_adc/deprecated/include -I/home/deedee/esp/esp-idf_5_2/components/esp_eth/include -I/home/deedee/esp/esp-idf_5_2/components/esp_gdbstub/include -I/home/deedee/esp/esp-idf_5_2/components/esp_hid/include -I/home/deedee/esp/esp-idf_5_2/components/tcp_transport/include -I/home/deedee/esp/esp-idf_5_2/components/esp_http_client/include -I/home/deedee/esp/esp-idf_5_2/components/esp_http_server/include -I/home/deedee/esp/esp-idf_5_2/components/esp_https_ota/include -I/home/deedee/esp/esp-idf_5_2/components/esp_psram/include -I/home/deedee/esp/esp-idf_5_2/components/esp_lcd/include -I/home/deedee/esp/esp-idf_5_2/components/esp_lcd/interface -I/home/deedee/esp/esp-idf_5_2/components/protobuf-c/protobuf-c -I/home/deedee/esp/esp-idf_5_2/components/protocomm/include/common -I/home/deedee/esp/esp-idf_5_2/components/protocomm/include/security -I/home/deedee/esp/esp-idf_5_2/components/protocomm/include/transports -I/home/deedee/esp/esp-idf_5_2/components/esp_local_ctrl/include -I/home/deedee/esp/esp-idf_5_2/components/espcoredump/include -I/home/deedee/esp/esp-idf_5_2/components/espcoredump/include/port/xtensa -I/home/deedee/esp/esp-idf_5_2/components/wear_levelling/include -I/home/deedee/esp/esp-idf_5_2/components/sdmmc/include -I/home/deedee/esp/esp-idf_5_2/components/fatfs/diskio -I/home/deedee/esp/esp-idf_5_2/components/fatfs/src -I/home/deedee/esp/esp-idf_5_2/components/fatfs/vfs -I/home/deedee/esp/esp-idf_5_2/components/idf_test/include -I/home/deedee/esp/esp-idf_5_2/components/idf_test/include/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/ieee802154/include -I/home/deedee/esp/esp-idf_5_2/components/json/cJSON -I/home/deedee/esp/esp-idf_5_2/components/mqtt/esp-mqtt/include -I/home/deedee/esp/esp-idf_5_2/components/nvs_sec_provider/include -I/home/deedee/esp/esp-idf_5_2/components/perfmon/include -I/home/deedee/esp/esp-idf_5_2/components/spiffs/include -I/home/deedee/esp/esp-idf_5_2/components/touch_element/include -I/home/deedee/esp/esp-idf_5_2/components/ulp/ulp_common/include -I/home/deedee/esp/esp-idf_5_2/components/ulp/ulp_common/include/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/usb/include -I/home/deedee/esp/esp-idf_5_2/components/wifi_provisioning/include -mlongcalls  -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=unused-but-set-variable -Wno-error=deprecated-declarations -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -Og -fmacro-prefix-map=/home/deedee/devel/lcd=. -fmacro-prefix-map=/home/deedee/esp/esp-idf_5_2=/IDF -fstrict-volatile-bitfields -fno-jump-tables -fno-tree-switch-conversion -std=gnu17 -Wno-old-style-declaration -MD -MT esp-idf/main/CMakeFiles/__idf_main.dir/lcd_driver.c.obj -MF esp-idf/main/CMakeFiles/__idf_main.dir/lcd_driver.c.obj.d -o esp-idf/main/CMakeFiles/__idf_main.dir/lcd_driver.c.obj -c /home/deedee/devel/lcd/main/lcd_driver.c
+/home/deedee/devel/lcd/main/lcd_driver.c:6:24: error: unknown type name 'lcd_init_cmd_t'
+    6 | DRAM_ATTR static const lcd_init_cmd_t                   st_init_cmds[] = {
+      |                        ^~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:8:9: warning: braces around scalar initializer
+    8 |         { 0x36, { ( 1 << 5 ) | ( 1 << 6 ) }, 1 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:8:9: note: (near initialization for 'st_init_cmds[0]')
+/home/deedee/devel/lcd/main/lcd_driver.c:8:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:8:9: note: (near initialization for 'st_init_cmds[0]')
+/home/deedee/devel/lcd/main/lcd_driver.c:8:17: warning: excess elements in scalar initializer
+    8 |         { 0x36, { ( 1 << 5 ) | ( 1 << 6 ) }, 1 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:8:17: note: (near initialization for 'st_init_cmds[0]')
+/home/deedee/devel/lcd/main/lcd_driver.c:8:46: warning: excess elements in scalar initializer
+    8 |         { 0x36, { ( 1 << 5 ) | ( 1 << 6 ) }, 1 },
+      |                                              ^
+/home/deedee/devel/lcd/main/lcd_driver.c:8:46: note: (near initialization for 'st_init_cmds[0]')
+/home/deedee/devel/lcd/main/lcd_driver.c:10:9: warning: braces around scalar initializer
+   10 |         { 0x3A, { 0x55 }, 1 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:10:9: note: (near initialization for 'st_init_cmds[1]')
+/home/deedee/devel/lcd/main/lcd_driver.c:10:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:10:9: note: (near initialization for 'st_init_cmds[1]')
+/home/deedee/devel/lcd/main/lcd_driver.c:10:17: warning: excess elements in scalar initializer
+   10 |         { 0x3A, { 0x55 }, 1 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:10:17: note: (near initialization for 'st_init_cmds[1]')
+/home/deedee/devel/lcd/main/lcd_driver.c:10:27: warning: excess elements in scalar initializer
+   10 |         { 0x3A, { 0x55 }, 1 },
+      |                           ^
+/home/deedee/devel/lcd/main/lcd_driver.c:10:27: note: (near initialization for 'st_init_cmds[1]')
+/home/deedee/devel/lcd/main/lcd_driver.c:12:9: warning: braces around scalar initializer
+   12 |         { 0xB2, { 0x0c, 0x0c, 0x00, 0x33, 0x33 }, 5 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:12:9: note: (near initialization for 'st_init_cmds[2]')
+/home/deedee/devel/lcd/main/lcd_driver.c:12:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:12:9: note: (near initialization for 'st_init_cmds[2]')
+/home/deedee/devel/lcd/main/lcd_driver.c:12:25: warning: excess elements in scalar initializer
+   12 |         { 0xB2, { 0x0c, 0x0c, 0x00, 0x33, 0x33 }, 5 },
+      |                         ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:12:25: note: (near initialization for 'st_init_cmds[2]')
+/home/deedee/devel/lcd/main/lcd_driver.c:12:31: warning: excess elements in scalar initializer
+   12 |         { 0xB2, { 0x0c, 0x0c, 0x00, 0x33, 0x33 }, 5 },
+      |                               ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:12:31: note: (near initialization for 'st_init_cmds[2]')
+/home/deedee/devel/lcd/main/lcd_driver.c:12:37: warning: excess elements in scalar initializer
+   12 |         { 0xB2, { 0x0c, 0x0c, 0x00, 0x33, 0x33 }, 5 },
+      |                                     ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:12:37: note: (near initialization for 'st_init_cmds[2]')
+/home/deedee/devel/lcd/main/lcd_driver.c:12:43: warning: excess elements in scalar initializer
+   12 |         { 0xB2, { 0x0c, 0x0c, 0x00, 0x33, 0x33 }, 5 },
+      |                                           ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:12:43: note: (near initialization for 'st_init_cmds[2]')
+/home/deedee/devel/lcd/main/lcd_driver.c:12:17: warning: excess elements in scalar initializer
+   12 |         { 0xB2, { 0x0c, 0x0c, 0x00, 0x33, 0x33 }, 5 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:12:17: note: (near initialization for 'st_init_cmds[2]')
+/home/deedee/devel/lcd/main/lcd_driver.c:12:51: warning: excess elements in scalar initializer
+   12 |         { 0xB2, { 0x0c, 0x0c, 0x00, 0x33, 0x33 }, 5 },
+      |                                                   ^
+/home/deedee/devel/lcd/main/lcd_driver.c:12:51: note: (near initialization for 'st_init_cmds[2]')
+/home/deedee/devel/lcd/main/lcd_driver.c:14:9: warning: braces around scalar initializer
+   14 |         { 0xB7, { 0x45 }, 1 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:14:9: note: (near initialization for 'st_init_cmds[3]')
+/home/deedee/devel/lcd/main/lcd_driver.c:14:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:14:9: note: (near initialization for 'st_init_cmds[3]')
+/home/deedee/devel/lcd/main/lcd_driver.c:14:17: warning: excess elements in scalar initializer
+   14 |         { 0xB7, { 0x45 }, 1 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:14:17: note: (near initialization for 'st_init_cmds[3]')
+/home/deedee/devel/lcd/main/lcd_driver.c:14:27: warning: excess elements in scalar initializer
+   14 |         { 0xB7, { 0x45 }, 1 },
+      |                           ^
+/home/deedee/devel/lcd/main/lcd_driver.c:14:27: note: (near initialization for 'st_init_cmds[3]')
+/home/deedee/devel/lcd/main/lcd_driver.c:16:9: warning: braces around scalar initializer
+   16 |         { 0xBB, { 0x2B }, 1 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:16:9: note: (near initialization for 'st_init_cmds[4]')
+/home/deedee/devel/lcd/main/lcd_driver.c:16:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:16:9: note: (near initialization for 'st_init_cmds[4]')
+/home/deedee/devel/lcd/main/lcd_driver.c:16:17: warning: excess elements in scalar initializer
+   16 |         { 0xBB, { 0x2B }, 1 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:16:17: note: (near initialization for 'st_init_cmds[4]')
+/home/deedee/devel/lcd/main/lcd_driver.c:16:27: warning: excess elements in scalar initializer
+   16 |         { 0xBB, { 0x2B }, 1 },
+      |                           ^
+/home/deedee/devel/lcd/main/lcd_driver.c:16:27: note: (near initialization for 'st_init_cmds[4]')
+/home/deedee/devel/lcd/main/lcd_driver.c:18:9: warning: braces around scalar initializer
+   18 |         { 0xC0, { 0x2C }, 1 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:18:9: note: (near initialization for 'st_init_cmds[5]')
+/home/deedee/devel/lcd/main/lcd_driver.c:18:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:18:9: note: (near initialization for 'st_init_cmds[5]')
+/home/deedee/devel/lcd/main/lcd_driver.c:18:17: warning: excess elements in scalar initializer
+   18 |         { 0xC0, { 0x2C }, 1 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:18:17: note: (near initialization for 'st_init_cmds[5]')
+/home/deedee/devel/lcd/main/lcd_driver.c:18:27: warning: excess elements in scalar initializer
+   18 |         { 0xC0, { 0x2C }, 1 },
+      |                           ^
+/home/deedee/devel/lcd/main/lcd_driver.c:18:27: note: (near initialization for 'st_init_cmds[5]')
+/home/deedee/devel/lcd/main/lcd_driver.c:20:9: warning: braces around scalar initializer
+   20 |         { 0xC2, { 0x01, 0xff }, 2 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:20:9: note: (near initialization for 'st_init_cmds[6]')
+/home/deedee/devel/lcd/main/lcd_driver.c:20:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:20:9: note: (near initialization for 'st_init_cmds[6]')
+/home/deedee/devel/lcd/main/lcd_driver.c:20:25: warning: excess elements in scalar initializer
+   20 |         { 0xC2, { 0x01, 0xff }, 2 },
+      |                         ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:20:25: note: (near initialization for 'st_init_cmds[6]')
+/home/deedee/devel/lcd/main/lcd_driver.c:20:17: warning: excess elements in scalar initializer
+   20 |         { 0xC2, { 0x01, 0xff }, 2 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:20:17: note: (near initialization for 'st_init_cmds[6]')
+/home/deedee/devel/lcd/main/lcd_driver.c:20:33: warning: excess elements in scalar initializer
+   20 |         { 0xC2, { 0x01, 0xff }, 2 },
+      |                                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:20:33: note: (near initialization for 'st_init_cmds[6]')
+/home/deedee/devel/lcd/main/lcd_driver.c:22:9: warning: braces around scalar initializer
+   22 |         { 0xC3, { 0x11 }, 1 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:22:9: note: (near initialization for 'st_init_cmds[7]')
+/home/deedee/devel/lcd/main/lcd_driver.c:22:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:22:9: note: (near initialization for 'st_init_cmds[7]')
+/home/deedee/devel/lcd/main/lcd_driver.c:22:17: warning: excess elements in scalar initializer
+   22 |         { 0xC3, { 0x11 }, 1 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:22:17: note: (near initialization for 'st_init_cmds[7]')
+/home/deedee/devel/lcd/main/lcd_driver.c:22:27: warning: excess elements in scalar initializer
+   22 |         { 0xC3, { 0x11 }, 1 },
+      |                           ^
+/home/deedee/devel/lcd/main/lcd_driver.c:22:27: note: (near initialization for 'st_init_cmds[7]')
+/home/deedee/devel/lcd/main/lcd_driver.c:24:9: warning: braces around scalar initializer
+   24 |         { 0xC4, { 0x20 }, 1 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:24:9: note: (near initialization for 'st_init_cmds[8]')
+/home/deedee/devel/lcd/main/lcd_driver.c:24:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:24:9: note: (near initialization for 'st_init_cmds[8]')
+/home/deedee/devel/lcd/main/lcd_driver.c:24:17: warning: excess elements in scalar initializer
+   24 |         { 0xC4, { 0x20 }, 1 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:24:17: note: (near initialization for 'st_init_cmds[8]')
+/home/deedee/devel/lcd/main/lcd_driver.c:24:27: warning: excess elements in scalar initializer
+   24 |         { 0xC4, { 0x20 }, 1 },
+      |                           ^
+/home/deedee/devel/lcd/main/lcd_driver.c:24:27: note: (near initialization for 'st_init_cmds[8]')
+/home/deedee/devel/lcd/main/lcd_driver.c:26:9: warning: braces around scalar initializer
+   26 |         { 0xC6, { 0x0f }, 1 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:26:9: note: (near initialization for 'st_init_cmds[9]')
+/home/deedee/devel/lcd/main/lcd_driver.c:26:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:26:9: note: (near initialization for 'st_init_cmds[9]')
+/home/deedee/devel/lcd/main/lcd_driver.c:26:17: warning: excess elements in scalar initializer
+   26 |         { 0xC6, { 0x0f }, 1 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:26:17: note: (near initialization for 'st_init_cmds[9]')
+/home/deedee/devel/lcd/main/lcd_driver.c:26:27: warning: excess elements in scalar initializer
+   26 |         { 0xC6, { 0x0f }, 1 },
+      |                           ^
+/home/deedee/devel/lcd/main/lcd_driver.c:26:27: note: (near initialization for 'st_init_cmds[9]')
+/home/deedee/devel/lcd/main/lcd_driver.c:28:9: warning: braces around scalar initializer
+   28 |         { 0xD0, { 0xA4, 0xA1 }, 1 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:28:9: note: (near initialization for 'st_init_cmds[10]')
+/home/deedee/devel/lcd/main/lcd_driver.c:28:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:28:9: note: (near initialization for 'st_init_cmds[10]')
+/home/deedee/devel/lcd/main/lcd_driver.c:28:25: warning: excess elements in scalar initializer
+   28 |         { 0xD0, { 0xA4, 0xA1 }, 1 },
+      |                         ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:28:25: note: (near initialization for 'st_init_cmds[10]')
+/home/deedee/devel/lcd/main/lcd_driver.c:28:17: warning: excess elements in scalar initializer
+   28 |         { 0xD0, { 0xA4, 0xA1 }, 1 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:28:17: note: (near initialization for 'st_init_cmds[10]')
+/home/deedee/devel/lcd/main/lcd_driver.c:28:33: warning: excess elements in scalar initializer
+   28 |         { 0xD0, { 0xA4, 0xA1 }, 1 },
+      |                                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:28:33: note: (near initialization for 'st_init_cmds[10]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:9: warning: braces around scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:30:9: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:30:9: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:25: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                         ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:25: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:31: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                               ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:31: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:37: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                     ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:37: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:43: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                           ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:43: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:49: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                 ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:49: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:55: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                       ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:55: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:61: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                             ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:61: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:67: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                                   ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:67: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:73: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                                         ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:73: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:79: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                                               ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:79: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:85: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                                                     ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:85: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:91: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                                                           ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:91: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:97: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                                                                 ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:97: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:17: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:30:17: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:30:105: warning: excess elements in scalar initializer
+   30 |         { 0xE0, { 0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19 }, 14 },
+      |                                                                                                         ^~
+/home/deedee/devel/lcd/main/lcd_driver.c:30:105: note: (near initialization for 'st_init_cmds[11]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:9: warning: braces around scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:32:9: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:32:9: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:25: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                         ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:25: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:31: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                               ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:31: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:37: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                     ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:37: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:43: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                           ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:43: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:49: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                 ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:49: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:55: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                       ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:55: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:61: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                             ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:61: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:67: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                                   ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:67: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:73: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                                         ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:73: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:79: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                                               ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:79: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:85: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                                                     ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:85: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:91: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                                                           ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:91: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:97: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                                                                 ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:97: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:17: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:32:17: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:32:105: warning: excess elements in scalar initializer
+   32 |         { 0xE1, { 0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19 }, 14 },
+      |                                                                                                         ^~
+/home/deedee/devel/lcd/main/lcd_driver.c:32:105: note: (near initialization for 'st_init_cmds[12]')
+/home/deedee/devel/lcd/main/lcd_driver.c:34:9: warning: braces around scalar initializer
+   34 |         { 0x11, { 0 }, 0x80 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:34:9: note: (near initialization for 'st_init_cmds[13]')
+/home/deedee/devel/lcd/main/lcd_driver.c:34:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:34:9: note: (near initialization for 'st_init_cmds[13]')
+/home/deedee/devel/lcd/main/lcd_driver.c:34:17: warning: excess elements in scalar initializer
+   34 |         { 0x11, { 0 }, 0x80 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:34:17: note: (near initialization for 'st_init_cmds[13]')
+/home/deedee/devel/lcd/main/lcd_driver.c:34:24: warning: excess elements in scalar initializer
+   34 |         { 0x11, { 0 }, 0x80 },
+      |                        ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:34:24: note: (near initialization for 'st_init_cmds[13]')
+/home/deedee/devel/lcd/main/lcd_driver.c:36:9: warning: braces around scalar initializer
+   36 |         { 0x29, { 0 }, 0x80 },
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:36:9: note: (near initialization for 'st_init_cmds[14]')
+/home/deedee/devel/lcd/main/lcd_driver.c:36:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:36:9: note: (near initialization for 'st_init_cmds[14]')
+/home/deedee/devel/lcd/main/lcd_driver.c:36:17: warning: excess elements in scalar initializer
+   36 |         { 0x29, { 0 }, 0x80 },
+      |                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:36:17: note: (near initialization for 'st_init_cmds[14]')
+/home/deedee/devel/lcd/main/lcd_driver.c:36:24: warning: excess elements in scalar initializer
+   36 |         { 0x29, { 0 }, 0x80 },
+      |                        ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:36:24: note: (near initialization for 'st_init_cmds[14]')
+/home/deedee/devel/lcd/main/lcd_driver.c:37:9: warning: braces around scalar initializer
+   37 |         { 0, { 0 }, 0xff }
+      |         ^
+/home/deedee/devel/lcd/main/lcd_driver.c:37:9: note: (near initialization for 'st_init_cmds[15]')
+/home/deedee/devel/lcd/main/lcd_driver.c:37:9: warning: braces around scalar initializer
+/home/deedee/devel/lcd/main/lcd_driver.c:37:9: note: (near initialization for 'st_init_cmds[15]')
+/home/deedee/devel/lcd/main/lcd_driver.c:37:14: warning: excess elements in scalar initializer
+   37 |         { 0, { 0 }, 0xff }
+      |              ^
+/home/deedee/devel/lcd/main/lcd_driver.c:37:14: note: (near initialization for 'st_init_cmds[15]')
+/home/deedee/devel/lcd/main/lcd_driver.c:37:21: warning: excess elements in scalar initializer
+   37 |         { 0, { 0 }, 0xff }
+      |                     ^~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:37:21: note: (near initialization for 'st_init_cmds[15]')
+/home/deedee/devel/lcd/main/lcd_driver.c: In function 'lcd_init':
+/home/deedee/devel/lcd/main/lcd_driver.c:53:15: error: unknown type name 'lcd_init_cmd_t'
+   53 |         const lcd_init_cmd_t    *lcd_init_cmds;
+      |               ^~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:70:35: error: request for member 'databytes' in something not a structure or union
+   70 |         while ( lcd_init_cmds[cmd].databytes != 0xff )
+      |                                   ^
+/home/deedee/devel/lcd/main/lcd_driver.c:72:17: error: implicit declaration of function 'lcd_cmd' [-Werror=implicit-function-declaration]
+   72 |                 lcd_cmd( spi, lcd_init_cmds[cmd].cmd, false );
+      |                 ^~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:72:49: error: request for member 'cmd' in something not a structure or union
+   72 |                 lcd_cmd( spi, lcd_init_cmds[cmd].cmd, false );
+      |                                                 ^
+/home/deedee/devel/lcd/main/lcd_driver.c:73:17: error: implicit declaration of function 'lcd_data' [-Werror=implicit-function-declaration]
+   73 |                 lcd_data( spi, lcd_init_cmds[cmd].data, lcd_init_cmds[cmd].databytes & 0x1F );
+      |                 ^~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:73:50: error: request for member 'data' in something not a structure or union
+   73 |                 lcd_data( spi, lcd_init_cmds[cmd].data, lcd_init_cmds[cmd].databytes & 0x1F );
+      |                                                  ^
+/home/deedee/devel/lcd/main/lcd_driver.c:73:75: error: request for member 'databytes' in something not a structure or union
+   73 |                 lcd_data( spi, lcd_init_cmds[cmd].data, lcd_init_cmds[cmd].databytes & 0x1F );
+      |                                                                           ^
+/home/deedee/devel/lcd/main/lcd_driver.c:74:40: error: request for member 'databytes' in something not a structure or union
+   74 |                 if ( lcd_init_cmds[cmd].databytes & 0x80 )
+      |                                        ^
+/home/deedee/devel/lcd/main/lcd_driver.c: At top level:
+/home/deedee/devel/lcd/main/lcd_driver.c:128:6: error: conflicting types for 'lcd_write_data_word'; have 'void(struct spi_device_t *, uint16_t)' {aka 'void(struct spi_device_t *, short unsigned int)'}
+  128 | void lcd_write_data_word( spi_device_handle_t spi, uint16_t data )
+      |      ^~~~~~~~~~~~~~~~~~~
+In file included from /home/deedee/devel/lcd/main/lcd_driver.c:1:
+/home/deedee/devel/lcd/main/lcd_driver.h:15:6: note: previous declaration of 'lcd_write_data_word' with type 'void(uint16_t)' {aka 'void(short unsigned int)'}
+   15 | void lcd_write_data_word( uint16_t d );
+      |      ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:157:1: error: expected identifier or '(' before '{' token
+  157 | {
+      | ^
+/home/deedee/devel/lcd/main/lcd_driver.c: In function 'lcd_set_cursor':
+/home/deedee/devel/lcd/main/lcd_driver.c:182:28: warning: passing argument 1 of 'lcd_write_command' makes pointer from integer without a cast [-Wint-conversion]
+  182 |         lcd_write_command( 0x2a );
+      |                            ^~~~
+      |                            |
+      |                            int
+/home/deedee/devel/lcd/main/lcd_driver.c:92:52: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'int'
+   92 | static void lcd_write_command( spi_device_handle_t spi, uint8_t data )
+      |                                ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:182:9: error: too few arguments to function 'lcd_write_command'
+  182 |         lcd_write_command( 0x2a );
+      |         ^~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:92:13: note: declared here
+   92 | static void lcd_write_command( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:183:32: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  183 |         lcd_write_data_byte( x >> 8 );
+      |                              ~~^~~~
+      |                                |
+      |                                int
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'int'
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:183:9: error: too few arguments to function 'lcd_write_data_byte'
+  183 |         lcd_write_data_byte( x >> 8 );
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:184:30: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  184 |         lcd_write_data_byte( x );
+      |                              ^
+      |                              |
+      |                              uint16_t {aka short unsigned int}
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'uint16_t' {aka 'short unsigned int'}
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:184:9: error: too few arguments to function 'lcd_write_data_byte'
+  184 |         lcd_write_data_byte( x );
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:185:32: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  185 |         lcd_write_data_byte( x >> 8 );
+      |                              ~~^~~~
+      |                                |
+      |                                int
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'int'
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:185:9: error: too few arguments to function 'lcd_write_data_byte'
+  185 |         lcd_write_data_byte( x >> 8 );
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:186:30: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  186 |         lcd_write_data_byte( x );
+      |                              ^
+      |                              |
+      |                              uint16_t {aka short unsigned int}
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'uint16_t' {aka 'short unsigned int'}
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:186:9: error: too few arguments to function 'lcd_write_data_byte'
+  186 |         lcd_write_data_byte( x );
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:188:28: warning: passing argument 1 of 'lcd_write_command' makes pointer from integer without a cast [-Wint-conversion]
+  188 |         lcd_write_command( 0x2b );
+      |                            ^~~~
+      |                            |
+      |                            int
+/home/deedee/devel/lcd/main/lcd_driver.c:92:52: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'int'
+   92 | static void lcd_write_command( spi_device_handle_t spi, uint8_t data )
+      |                                ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:188:9: error: too few arguments to function 'lcd_write_command'
+  188 |         lcd_write_command( 0x2b );
+      |         ^~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:92:13: note: declared here
+   92 | static void lcd_write_command( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:189:32: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  189 |         lcd_write_data_byte( y >> 8 );
+      |                              ~~^~~~
+      |                                |
+      |                                int
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'int'
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:189:9: error: too few arguments to function 'lcd_write_data_byte'
+  189 |         lcd_write_data_byte( y >> 8 );
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:190:30: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  190 |         lcd_write_data_byte( y );
+      |                              ^
+      |                              |
+      |                              uint16_t {aka short unsigned int}
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'uint16_t' {aka 'short unsigned int'}
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:190:9: error: too few arguments to function 'lcd_write_data_byte'
+  190 |         lcd_write_data_byte( y );
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:191:32: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  191 |         lcd_write_data_byte( y >> 8 );
+      |                              ~~^~~~
+      |                                |
+      |                                int
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'int'
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:191:9: error: too few arguments to function 'lcd_write_data_byte'
+  191 |         lcd_write_data_byte( y >> 8 );
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:192:30: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  192 |         lcd_write_data_byte( y );
+      |                              ^
+      |                              |
+      |                              uint16_t {aka short unsigned int}
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'uint16_t' {aka 'short unsigned int'}
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:192:9: error: too few arguments to function 'lcd_write_data_byte'
+  192 |         lcd_write_data_byte( y );
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:194:28: warning: passing argument 1 of 'lcd_write_command' makes pointer from integer without a cast [-Wint-conversion]
+  194 |         lcd_write_command( 0x2C );
+      |                            ^~~~
+      |                            |
+      |                            int
+/home/deedee/devel/lcd/main/lcd_driver.c:92:52: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'int'
+   92 | static void lcd_write_command( spi_device_handle_t spi, uint8_t data )
+      |                                ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:194:9: error: too few arguments to function 'lcd_write_command'
+  194 |         lcd_write_command( 0x2C );
+      |         ^~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:92:13: note: declared here
+   92 | static void lcd_write_command( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c: In function 'lcd_clear':
+/home/deedee/devel/lcd/main/lcd_driver.c:207:9: error: implicit declaration of function 'LCD_SetWindow'; did you mean 'lcd_set_window'? [-Werror=implicit-function-declaration]
+  207 |         LCD_SetWindow( 0, 0, LCD_WIDTH, LCD_HEIGHT );
+      |         ^~~~~~~~~~~~~
+      |         lcd_set_window
+/home/deedee/devel/lcd/main/lcd_driver.c:208:9: error: implicit declaration of function 'DEV_Digital_Write' [-Werror=implicit-function-declaration]
+  208 |         DEV_Digital_Write( DEV_DC_PIN, 1 );
+      |         ^~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:208:28: error: 'DEV_DC_PIN' undeclared (first use in this function)
+  208 |         DEV_Digital_Write( DEV_DC_PIN, 1 );
+      |                            ^~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:208:28: note: each undeclared identifier is reported only once for each function it appears in
+/home/deedee/devel/lcd/main/lcd_driver.c:213:61: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  213 |                         lcd_write_data_byte( ( color >> 8 ) & 0xff );
+      |                                              ~~~~~~~~~~~~~~~^~~~~~
+      |                                                             |
+      |                                                             int
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'int'
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:213:25: error: too few arguments to function 'lcd_write_data_byte'
+  213 |                         lcd_write_data_byte( ( color >> 8 ) & 0xff );
+      |                         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:214:46: warning: passing argument 1 of 'lcd_write_data_byte' makes pointer from integer without a cast [-Wint-conversion]
+  214 |                         lcd_write_data_byte( color );
+      |                                              ^~~~~
+      |                                              |
+      |                                              uint16_t {aka short unsigned int}
+/home/deedee/devel/lcd/main/lcd_driver.c:110:54: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'uint16_t' {aka 'short unsigned int'}
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |                                  ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:214:25: error: too few arguments to function 'lcd_write_data_byte'
+  214 |                         lcd_write_data_byte( color );
+      |                         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:110:13: note: declared here
+  110 | static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c: In function 'lcd_clear_window':
+/home/deedee/devel/lcd/main/lcd_driver.c:238:46: warning: passing argument 1 of 'lcd_write_data_word' makes pointer from integer without a cast [-Wint-conversion]
+  238 |                         lcd_write_data_word( color );
+      |                                              ^~~~~
+      |                                              |
+      |                                              uint16_t {aka short unsigned int}
+/home/deedee/devel/lcd/main/lcd_driver.c:128:47: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'uint16_t' {aka 'short unsigned int'}
+  128 | void lcd_write_data_word( spi_device_handle_t spi, uint16_t data )
+      |                           ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:238:25: error: too few arguments to function 'lcd_write_data_word'
+  238 |                         lcd_write_data_word( color );
+      |                         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:128:6: note: declared here
+  128 | void lcd_write_data_word( spi_device_handle_t spi, uint16_t data )
+      |      ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c: In function 'lcd_draw_paint':
+/home/deedee/devel/lcd/main/lcd_driver.c:253:30: warning: passing argument 1 of 'lcd_write_data_word' makes pointer from integer without a cast [-Wint-conversion]
+  253 |         lcd_write_data_word( color );
+      |                              ^~~~~
+      |                              |
+      |                              uint16_t {aka short unsigned int}
+/home/deedee/devel/lcd/main/lcd_driver.c:128:47: note: expected 'spi_device_handle_t' {aka 'struct spi_device_t *'} but argument is of type 'uint16_t' {aka 'short unsigned int'}
+  128 | void lcd_write_data_word( spi_device_handle_t spi, uint16_t data )
+      |                           ~~~~~~~~~~~~~~~~~~~~^~~
+/home/deedee/devel/lcd/main/lcd_driver.c:253:9: error: too few arguments to function 'lcd_write_data_word'
+  253 |         lcd_write_data_word( color );
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/lcd_driver.c:128:6: note: declared here
+  128 | void lcd_write_data_word( spi_device_handle_t spi, uint16_t data )
+      |      ^~~~~~~~~~~~~~~~~~~
+cc1: some warnings being treated as errors
+[3/8] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/gui_paint.c.obj
+FAILED: esp-idf/main/CMakeFiles/__idf_main.dir/gui_paint.c.obj 
+/home/deedee/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/bin/xtensa-esp32s3-elf-gcc -DESP_PLATFORM -DIDF_VER=\"v5.2-dev-2756-g2bc1f2f574-dirty\" -DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\" -DSOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE -DSOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ -DUNITY_INCLUDE_CONFIG_H -D_GLIBCXX_HAVE_POSIX_SEMAPHORE -D_GLIBCXX_USE_POSIX_SEMAPHORE -D_GNU_SOURCE -D_POSIX_READER_WRITER_LOCKS -I/home/deedee/devel/lcd/build/config -I/home/deedee/devel/lcd/main -I/home/deedee/devel/lcd/main/st_2_inch -I/home/deedee/esp/esp-idf_5_2/components/newlib/platform_include -I/home/deedee/esp/esp-idf_5_2/components/freertos/config/include -I/home/deedee/esp/esp-idf_5_2/components/freertos/config/include/freertos -I/home/deedee/esp/esp-idf_5_2/components/freertos/config/xtensa/include -I/home/deedee/esp/esp-idf_5_2/components/freertos/FreeRTOS-Kernel/include -I/home/deedee/esp/esp-idf_5_2/components/freertos/FreeRTOS-Kernel/portable/xtensa/include -I/home/deedee/esp/esp-idf_5_2/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos -I/home/deedee/esp/esp-idf_5_2/components/freertos/esp_additions/include -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/include -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/include/soc -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/include/soc/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/port/esp32s3/. -I/home/deedee/esp/esp-idf_5_2/components/esp_hw_support/port/esp32s3/private_include -I/home/deedee/esp/esp-idf_5_2/components/heap/include -I/home/deedee/esp/esp-idf_5_2/components/log/include -I/home/deedee/esp/esp-idf_5_2/components/soc/include -I/home/deedee/esp/esp-idf_5_2/components/soc/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/soc/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/hal/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/hal/include -I/home/deedee/esp/esp-idf_5_2/components/hal/platform_port/include -I/home/deedee/esp/esp-idf_5_2/components/esp_rom/include -I/home/deedee/esp/esp-idf_5_2/components/esp_rom/include/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/esp_rom/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/esp_common/include -I/home/deedee/esp/esp-idf_5_2/components/esp_system/include -I/home/deedee/esp/esp-idf_5_2/components/esp_system/port/soc -I/home/deedee/esp/esp-idf_5_2/components/esp_system/port/include/private -I/home/deedee/esp/esp-idf_5_2/components/xtensa/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/xtensa/include -I/home/deedee/esp/esp-idf_5_2/components/xtensa/deprecated_include -I/home/deedee/esp/esp-idf_5_2/components/lwip/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/include/apps -I/home/deedee/esp/esp-idf_5_2/components/lwip/include/apps/sntp -I/home/deedee/esp/esp-idf_5_2/components/lwip/lwip/src/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/freertos/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/esp32xx/include -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/esp32xx/include/arch -I/home/deedee/esp/esp-idf_5_2/components/lwip/port/esp32xx/include/sys -I/home/deedee/devel/lcd/managed_components/espressif__esp_jpeg/include -I/home/deedee/esp/esp-idf_5_2/components/esp_ringbuf/include -I/home/deedee/esp/esp-idf_5_2/components/efuse/include -I/home/deedee/esp/esp-idf_5_2/components/efuse/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/driver/include -I/home/deedee/esp/esp-idf_5_2/components/driver/deprecated -I/home/deedee/esp/esp-idf_5_2/components/driver/analog_comparator/include -I/home/deedee/esp/esp-idf_5_2/components/driver/dac/include -I/home/deedee/esp/esp-idf_5_2/components/driver/gpio/include -I/home/deedee/esp/esp-idf_5_2/components/driver/gptimer/include -I/home/deedee/esp/esp-idf_5_2/components/driver/i2c/include -I/home/deedee/esp/esp-idf_5_2/components/driver/i2s/include -I/home/deedee/esp/esp-idf_5_2/components/driver/ledc/include -I/home/deedee/esp/esp-idf_5_2/components/driver/mcpwm/include -I/home/deedee/esp/esp-idf_5_2/components/driver/parlio/include -I/home/deedee/esp/esp-idf_5_2/components/driver/pcnt/include -I/home/deedee/esp/esp-idf_5_2/components/driver/rmt/include -I/home/deedee/esp/esp-idf_5_2/components/driver/sdio_slave/include -I/home/deedee/esp/esp-idf_5_2/components/driver/sdmmc/include -I/home/deedee/esp/esp-idf_5_2/components/driver/sigma_delta/include -I/home/deedee/esp/esp-idf_5_2/components/driver/spi/include -I/home/deedee/esp/esp-idf_5_2/components/driver/temperature_sensor/include -I/home/deedee/esp/esp-idf_5_2/components/driver/touch_sensor/include -I/home/deedee/esp/esp-idf_5_2/components/driver/twai/include -I/home/deedee/esp/esp-idf_5_2/components/driver/uart/include -I/home/deedee/esp/esp-idf_5_2/components/driver/usb_serial_jtag/include -I/home/deedee/esp/esp-idf_5_2/components/driver/touch_sensor/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/esp_pm/include -I/home/deedee/esp/esp-idf_5_2/components/mbedtls/port/include -I/home/deedee/esp/esp-idf_5_2/components/mbedtls/mbedtls/include -I/home/deedee/esp/esp-idf_5_2/components/mbedtls/mbedtls/library -I/home/deedee/esp/esp-idf_5_2/components/mbedtls/esp_crt_bundle/include -I/home/deedee/esp/esp-idf_5_2/components/esp_bootloader_format/include -I/home/deedee/esp/esp-idf_5_2/components/esp_app_format/include -I/home/deedee/esp/esp-idf_5_2/components/bootloader_support/include -I/home/deedee/esp/esp-idf_5_2/components/bootloader_support/bootloader_flash/include -I/home/deedee/esp/esp-idf_5_2/components/esp_partition/include -I/home/deedee/esp/esp-idf_5_2/components/app_update/include -I/home/deedee/esp/esp-idf_5_2/components/esp_mm/include -I/home/deedee/esp/esp-idf_5_2/components/spi_flash/include -I/home/deedee/esp/esp-idf_5_2/components/pthread/include -I/home/deedee/esp/esp-idf_5_2/components/esp_timer/include -I/home/deedee/esp/esp-idf_5_2/components/app_trace/include -I/home/deedee/esp/esp-idf_5_2/components/esp_event/include -I/home/deedee/esp/esp-idf_5_2/components/nvs_flash/include -I/home/deedee/esp/esp-idf_5_2/components/esp_phy/include -I/home/deedee/esp/esp-idf_5_2/components/esp_phy/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/vfs/include -I/home/deedee/esp/esp-idf_5_2/components/esp_netif/include -I/home/deedee/esp/esp-idf_5_2/components/wpa_supplicant/include -I/home/deedee/esp/esp-idf_5_2/components/wpa_supplicant/port/include -I/home/deedee/esp/esp-idf_5_2/components/wpa_supplicant/esp_supplicant/include -I/home/deedee/esp/esp-idf_5_2/components/esp_coex/include -I/home/deedee/esp/esp-idf_5_2/components/esp_wifi/include -I/home/deedee/esp/esp-idf_5_2/components/esp_wifi/wifi_apps/include -I/home/deedee/esp/esp-idf_5_2/components/unity/include -I/home/deedee/esp/esp-idf_5_2/components/unity/unity/src -I/home/deedee/esp/esp-idf_5_2/components/cmock/CMock/src -I/home/deedee/esp/esp-idf_5_2/components/console -I/home/deedee/esp/esp-idf_5_2/components/http_parser -I/home/deedee/esp/esp-idf_5_2/components/esp-tls -I/home/deedee/esp/esp-idf_5_2/components/esp-tls/esp-tls-crypto -I/home/deedee/esp/esp-idf_5_2/components/esp_adc/include -I/home/deedee/esp/esp-idf_5_2/components/esp_adc/interface -I/home/deedee/esp/esp-idf_5_2/components/esp_adc/esp32s3/include -I/home/deedee/esp/esp-idf_5_2/components/esp_adc/deprecated/include -I/home/deedee/esp/esp-idf_5_2/components/esp_eth/include -I/home/deedee/esp/esp-idf_5_2/components/esp_gdbstub/include -I/home/deedee/esp/esp-idf_5_2/components/esp_hid/include -I/home/deedee/esp/esp-idf_5_2/components/tcp_transport/include -I/home/deedee/esp/esp-idf_5_2/components/esp_http_client/include -I/home/deedee/esp/esp-idf_5_2/components/esp_http_server/include -I/home/deedee/esp/esp-idf_5_2/components/esp_https_ota/include -I/home/deedee/esp/esp-idf_5_2/components/esp_psram/include -I/home/deedee/esp/esp-idf_5_2/components/esp_lcd/include -I/home/deedee/esp/esp-idf_5_2/components/esp_lcd/interface -I/home/deedee/esp/esp-idf_5_2/components/protobuf-c/protobuf-c -I/home/deedee/esp/esp-idf_5_2/components/protocomm/include/common -I/home/deedee/esp/esp-idf_5_2/components/protocomm/include/security -I/home/deedee/esp/esp-idf_5_2/components/protocomm/include/transports -I/home/deedee/esp/esp-idf_5_2/components/esp_local_ctrl/include -I/home/deedee/esp/esp-idf_5_2/components/espcoredump/include -I/home/deedee/esp/esp-idf_5_2/components/espcoredump/include/port/xtensa -I/home/deedee/esp/esp-idf_5_2/components/wear_levelling/include -I/home/deedee/esp/esp-idf_5_2/components/sdmmc/include -I/home/deedee/esp/esp-idf_5_2/components/fatfs/diskio -I/home/deedee/esp/esp-idf_5_2/components/fatfs/src -I/home/deedee/esp/esp-idf_5_2/components/fatfs/vfs -I/home/deedee/esp/esp-idf_5_2/components/idf_test/include -I/home/deedee/esp/esp-idf_5_2/components/idf_test/include/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/ieee802154/include -I/home/deedee/esp/esp-idf_5_2/components/json/cJSON -I/home/deedee/esp/esp-idf_5_2/components/mqtt/esp-mqtt/include -I/home/deedee/esp/esp-idf_5_2/components/nvs_sec_provider/include -I/home/deedee/esp/esp-idf_5_2/components/perfmon/include -I/home/deedee/esp/esp-idf_5_2/components/spiffs/include -I/home/deedee/esp/esp-idf_5_2/components/touch_element/include -I/home/deedee/esp/esp-idf_5_2/components/ulp/ulp_common/include -I/home/deedee/esp/esp-idf_5_2/components/ulp/ulp_common/include/esp32s3 -I/home/deedee/esp/esp-idf_5_2/components/usb/include -I/home/deedee/esp/esp-idf_5_2/components/wifi_provisioning/include -mlongcalls  -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=unused-but-set-variable -Wno-error=deprecated-declarations -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -Og -fmacro-prefix-map=/home/deedee/devel/lcd=. -fmacro-prefix-map=/home/deedee/esp/esp-idf_5_2=/IDF -fstrict-volatile-bitfields -fno-jump-tables -fno-tree-switch-conversion -std=gnu17 -Wno-old-style-declaration -MD -MT esp-idf/main/CMakeFiles/__idf_main.dir/gui_paint.c.obj -MF esp-idf/main/CMakeFiles/__idf_main.dir/gui_paint.c.obj.d -o esp-idf/main/CMakeFiles/__idf_main.dir/gui_paint.c.obj -c /home/deedee/devel/lcd/main/gui_paint.c
+/home/deedee/devel/lcd/main/gui_paint.c: In function 'paint_draw_point':
+/home/deedee/devel/lcd/main/gui_paint.c:232:40: error: 'paint_t' has no member named 'set_pixel'
+  232 |                                 __paint.set_pixel( x_point + x_dir_num - dot_pixel, y_point + y_dir_num - dot_pixel, color );
+      |                                        ^
+/home/deedee/devel/lcd/main/gui_paint.c:242:40: error: 'paint_t' has no member named 'set_pixel'
+  242 |                                 __paint.set_pixel( x_point + x_dir_num - 1, y_point + y_dir_num - 1, color );
+      |                                        ^
+/home/deedee/devel/lcd/main/gui_paint.c: In function 'paint_draw_rectangle':
+/home/deedee/devel/lcd/main/gui_paint.c:346:14: error: 'Filled' undeclared (first use in this function); did you mean 'filled'?
+  346 |         if ( Filled )
+      |              ^~~~~~
+      |              filled
+/home/deedee/devel/lcd/main/gui_paint.c:346:14: note: each undeclared identifier is reported only once for each function it appears in
+/home/deedee/devel/lcd/main/gui_paint.c: In function 'paint_draw_char':
+/home/deedee/devel/lcd/main/gui_paint.c:464:16: error: 'x_point' undeclared (first use in this function); did you mean 'u_int'?
+  464 |         if ( ( x_point > __paint.width ) || ( y_point > __paint.height ) )
+      |                ^~~~~~~
+      |                u_int
+/home/deedee/devel/lcd/main/gui_paint.c:464:47: error: 'y_point' undeclared (first use in this function); did you mean 'u_int'?
+  464 |         if ( ( x_point > __paint.width ) || ( y_point > __paint.height ) )
+      |                                               ^~~~~~~
+      |                                               u_int
+/home/deedee/devel/lcd/main/gui_paint.c:481:38: error: implicit declaration of function 'pgm_read_byte' [-Werror=implicit-function-declaration]
+  481 |                                 if ( pgm_read_byte( ptr ) & ( 0x80 >> ( column % 8 ) ) )
+      |                                      ^~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/gui_paint.c: In function 'paint_draw_float_num':
+/home/deedee/devel/lcd/main/gui_paint.c:629:9: error: implicit declaration of function 'dtostrf' [-Werror=implicit-function-declaration]
+  629 |         dtostrf( nummber, 0, decimal_point + 2, str );
+      |         ^~~~~~~
+/home/deedee/devel/lcd/main/gui_paint.c: At top level:
+/home/deedee/devel/lcd/main/gui_paint.c:686:1: error: return type defaults to 'int' [-Werror=implicit-int]
+  686 | paint_draw_image(               const uint8_t *image,
+      | ^~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/gui_paint.c:686:1: warning: conflicting types for 'paint_draw_image'
+In file included from /home/deedee/devel/lcd/main/gui_paint.c:6:
+/home/deedee/devel/lcd/main/gui_paint.h:209:6: note: previous declaration of 'paint_draw_image' with type 'void(const uint8_t *, uint16_t,  uint16_t,  uint16_t,  uint16_t)' {aka 'void(const unsigned char *, short unsigned int,  short unsigned int,  short unsigned int,  short unsigned int)'}
+  209 | void paint_draw_image(          const uint8_t *image,
+      |      ^~~~~~~~~~~~~~~~
+/home/deedee/devel/lcd/main/gui_paint.c: In function 'paint_draw_image':
+/home/deedee/devel/lcd/main/gui_paint.c:702:79: error: invalid operands to binary << (have 'const uint8_t *' {aka 'const unsigned char *'} and 'int')
+  702 |                                 color = ( image + j * y_end * 2 + i * 2 + 1 ) << 8 | ( image + j * y_end * 2 + i * 2  );
+      |                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~
+      |                                                                         |
+      |                                                                         const uint8_t * {aka const unsigned char *}
+cc1: some warnings being treated as errors
+ninja: build stopped: subcommand failed.

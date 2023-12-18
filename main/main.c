@@ -1,13 +1,3 @@
-
-
-/* SPI Master example
-
-   This example code is in the Public Domain (or CC0 licensed, at your option.)
-
-   Unless required by applicable law or agreed to in writing, this
-   software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-   CONDITIONS OF ANY KIND, either express or implied.
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +8,10 @@
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 
-#include "pretty_effect.h"
+#include "lcd_driver.h"
+#include "gui_paint.h"
+
+//#include "pretty_effect.h"
 
 /*
  This code displays some fancy graphics on the 320x240 LCD on an ESP-WROVER_KIT board.
@@ -45,7 +38,7 @@
 #define PIN_NUM_RST		( 48 )
 #define PIN_NUM_BCKL		( 47 )
 
-#define LCD_BK_LIGHT_ON_LEVEL   ( 0 )
+//#define LCD_BK_LIGHT_ON_LEVEL   ( 0 )
 
 //To speed up transfers, every SPI transfer sends a bunch of lines. This define specifies how many. More means more memory use,
 //but less overhead for setting up / finishing transfers. Make sure 240 is dividable by this.
@@ -53,61 +46,19 @@
 
 /*
  The LCD needs a bunch of command/argument values to be initialized. They are stored in this struct.
-*/
 typedef struct {
     uint8_t cmd;
     uint8_t data[16];
     uint8_t databytes; //No of data in data; bit 7 = delay after set; 0xFF = end of cmds.
 } lcd_init_cmd_t;
 
+*/
 typedef enum {
     LCD_TYPE_ILI = 1,
     LCD_TYPE_ST,
     LCD_TYPE_MAX,
 } type_lcd_t;
 
-//Place data into DRAM. Constant data gets placed into DROM by default, which is not accessible by DMA.
-DRAM_ATTR static const lcd_init_cmd_t st_init_cmds[] = {
-    /* Memory Data Access Control, MX=MV=1, MY=ML=MH=0, RGB=0 */
-    {0x36, {(1 << 5) | (1 << 6)}, 1},
-    /* Interface Pixel Format, 16bits/pixel for RGB/MCU interface */
-    {0x3A, {0x55}, 1},
-    /* Porch Setting */
-    {0xB2, {0x0c, 0x0c, 0x00, 0x33, 0x33}, 5},
-    /* Gate Control, Vgh=13.65V, Vgl=-10.43V */
-    {0xB7, {0x45}, 1},
-    /* VCOM Setting, VCOM=1.175V */
-    {0xBB, {0x2B}, 1},
-    /* LCM Control, XOR: BGR, MX, MH */
-    {0xC0, {0x2C}, 1},
-    /* VDV and VRH Command Enable, enable=1 */
-    {0xC2, {0x01, 0xff}, 2},
-    /* VRH Set, Vap=4.4+... */
-    {0xC3, {0x11}, 1},
-    /* VDV Set, VDV=0 */
-    {0xC4, {0x20}, 1},
-    /* Frame Rate Control, 60Hz, inversion=0 */
-    {0xC6, {0x0f}, 1},
-    /* Power Control 1, AVDD=6.8V, AVCL=-4.8V, VDDS=2.3V */
-    {0xD0, {0xA4, 0xA1}, 1},
-    /* Positive Voltage Gamma Control */
-    {0xE0, {0xD0, 0x00, 0x05, 0x0E, 0x15, 0x0D, 0x37, 0x43, 0x47, 0x09, 0x15, 0x12, 0x16, 0x19}, 14},
-    /* Negative Voltage Gamma Control */
-    {0xE1, {0xD0, 0x00, 0x05, 0x0D, 0x0C, 0x06, 0x2D, 0x44, 0x40, 0x0E, 0x1C, 0x18, 0x16, 0x19}, 14},
-    /* Sleep Out */
-    {0x11, {0}, 0x80},
-    /* Display On */
-    {0x29, {0}, 0x80},
-    {0, {0}, 0xff}
-};
-
-/* Send a command to the LCD. Uses spi_device_polling_transmit, which waits
- * until the transfer is complete.
- *
- * Since command transactions are usually small, they are handled in polling
- * mode for higher speed. The overhead of interrupt transactions is more than
- * just waiting for the transaction to complete.
- */
 void lcd_cmd( spi_device_handle_t spi, const uint8_t cmd, bool keep_cs_active )
 {
 	esp_err_t			ret;
@@ -160,7 +111,7 @@ void lcd_spi_pre_transfer_callback( spi_transaction_t *t )
 	gpio_set_level( PIN_NUM_DC, dc );
 }
 
-
+/*
 static void lcd_reset()
 {
 	gpio_set_level( PIN_NUM_RST, 0 );
@@ -168,9 +119,9 @@ static void lcd_reset()
 	gpio_set_level( PIN_NUM_RST, 1 );
 	vTaskDelay( 100 / portTICK_PERIOD_MS );
 }
-
+*/
 #define LCD_CTRL_BITMASK	( ( 1ULL << PIN_NUM_DC ) | ( 1ULL << PIN_NUM_RST ) | ( 1ULL << PIN_NUM_BCKL ) )
-
+/*
 //Initialize the display
 void lcd_init( spi_device_handle_t spi )
 {
@@ -212,7 +163,7 @@ void lcd_init( spi_device_handle_t spi )
 
 	printf( "LCD ST7789V initialization finished!!!\n" );
 }
-
+*/
 /* To send a set of lines we have to send a command, 2 data bytes, another command, 2 more data bytes and another command
  * before sending the line data itself; a total of 6 transactions. (We can't put all of this in just one transaction
  * because the D/C line needs to be toggled in the middle.)
@@ -220,6 +171,8 @@ void lcd_init( spi_device_handle_t spi )
  * sent faster (compared to calling spi_device_transmit several times), and at
  * the mean while the lines for next transactions can get calculated.
  */
+
+/*
 static void send_lines( spi_device_handle_t spi, int ypos, uint16_t *data )
 {
 	esp_err_t			ret;
@@ -411,7 +364,7 @@ printf( "  %d\n", __LINE__ );
 		}
 	}
 }
-
+*/
 void app_main(void)
 {
 	esp_err_t				ret;
@@ -448,13 +401,29 @@ printf( "  %d\n", __LINE__ );
 
 printf( "  %d\n", __LINE__ );
 	//Initialize the effect displayed
-	ret = pretty_effect_init();
-	ESP_ERROR_CHECK( ret );
+//	ret = pretty_effect_init();
+//	ESP_ERROR_CHECK( ret );
+
+paint_new_image(LCD_WIDTH, LCD_HEIGHT, 0, WHITE);
+paint_clear(WHITE);
+paint_draw_string(30, 10, "123", &__font_24, YELLOW, RED);
+paint_draw_string(30, 34, "ABC", &__font_24, BLUE, CYAN);
+
+paint_draw_rectangle(125, 10, 225, 58, RED,  DOT_PIXEL_2X2,DRAW_FILL_EMPTY);
+paint_draw_line(125, 10, 225, 58, MAGENTA,   DOT_PIXEL_2X2,LINE_STYLE_SOLID);
+paint_draw_line(225, 10, 125, 58, MAGENTA,   DOT_PIXEL_2X2,LINE_STYLE_SOLID);
+
+paint_draw_circle(150,100, 25, BLUE,   DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+paint_draw_circle(180,100, 25, BLACK,  DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+paint_draw_circle(210,100, 25, RED,    DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+paint_draw_circle(165,125, 25, YELLOW, DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+paint_draw_circle(195,125, 25, GREEN,  DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+
 
 
 printf( "  %d\n", __LINE__ );
 	//Go do nice stuff.
-	display_pretty_colors( spi );
+//	display_pretty_colors( spi );
 }
 
 

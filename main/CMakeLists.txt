@@ -1,6 +1,6 @@
-set	( srcs	"pretty_effect.c"
+set	( srcs	"lcd_driver.c"
 		"main.c"
-		"decode_image.c"
+		"gui_paint.c"
 	)
 
 idf_component_register	( 	SRCS ${srcs}

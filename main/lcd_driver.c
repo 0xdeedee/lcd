@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "lcd_driver.h"
 
 
@@ -37,6 +39,42 @@ DRAM_ATTR static const lcd_init_cmd_t			st_init_cmds[] = {
 	{ 0, { 0 }, 0xff }
 };
 
+
+void lcd_cmd( spi_device_handle_t spi, const uint8_t cmd, bool keep_cs_active )
+{
+	esp_err_t			ret;
+	spi_transaction_t		t;
+
+	memset( &t, 0, sizeof( t ) );                                   //Zero out the transaction
+	t.length = 8;                                                   //Command is 8 bits
+	t.tx_buffer = &cmd;                                             //The data is the cmd itself
+	t.user = ( void * )0;                                           //D/C needs to be set to 0
+
+	if ( keep_cs_active )
+	{
+		t.flags = SPI_TRANS_CS_KEEP_ACTIVE;                     //Keep CS active after data transfer
+	}
+	ret = spi_device_polling_transmit( spi, &t );                   //Transmit!
+	assert( ret == ESP_OK );                                        //Should have had no issues.
+}
+
+void lcd_data( spi_device_handle_t spi, const uint8_t *data, int len )
+{
+        esp_err_t                       ret;
+        spi_transaction_t               t;
+
+        if ( len == 0 )
+        {
+                return;
+        }
+
+        memset( &t, 0, sizeof( t ) );                                   //Zero out the transaction
+        t.length = len * 8;                                             //Len is in bytes, transaction length is in bits.
+        t.tx_buffer = data;                                             //Data
+        t.user = ( void * )1;                                           //D/C needs to be set to 1
+        ret = spi_device_polling_transmit( spi, &t );                   //Transmit!
+        assert( ret == ESP_OK );                                        //Should have had no issues.
+}
 
 
 static void lcd_reset()                 
