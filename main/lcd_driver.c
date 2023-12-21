@@ -187,7 +187,7 @@ static void lcd_write_command( spi_device_handle_t spi, uint8_t data )
 {
         esp_err_t                       ret;
         static spi_transaction_t        trans;
-        static spi_transaction_t        *rtrans;
+//        static spi_transaction_t        *rtrans;
 
 	memset( &trans, 0, sizeof( trans ) );
         trans.length = 8;
@@ -195,7 +195,8 @@ static void lcd_write_command( spi_device_handle_t spi, uint8_t data )
         trans.flags = SPI_TRANS_USE_TXDATA;
 	trans.tx_data[0]        = data;
 
-        ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
+	ret = spi_device_polling_transmit( spi, &trans );
+//        ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
         assert(ret == ESP_OK);
 
 //	ret = spi_device_get_trans_result( spi, &rtrans, portMAX_DELAY);
@@ -206,14 +207,15 @@ static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
 {
 	esp_err_t			ret;
 	static spi_transaction_t	trans;
-	static spi_transaction_t	*rtrans;
+//	static spi_transaction_t	*rtrans;
 
 	trans.length		= 8;
 	trans.user		= ( void * )1;
 	trans.flags		= SPI_TRANS_USE_TXDATA;
 	trans.tx_data[0]	= data;
 
-	ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
+	ret = spi_device_polling_transmit( spi, &trans );
+//	ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
 	assert( ret == ESP_OK );
 
 //	ret = spi_device_get_trans_result( spi, &rtrans, portMAX_DELAY );
@@ -224,16 +226,19 @@ static void lcd_write_data_word( spi_device_handle_t spi, uint16_t data )
 {
 	esp_err_t			ret;
 	static spi_transaction_t	trans;
-	static spi_transaction_t	*rtrans;
+//	static spi_transaction_t	*rtrans;
 
 	trans.length		= 16;
 	trans.user		= ( void * )1;
 	trans.flags		= SPI_TRANS_USE_TXDATA;
-	trans.tx_data[0]	= data >> 8;
-	trans.tx_data[0]	= data & 0xFF;
+//	trans.tx_buffer = &data;
+	trans.tx_data[0]	= ( data >> 8 ) & 0xFF;
+	trans.tx_data[1]	= data & 0xFF;
+//	printf( "--> data %d, %d, %d \n", data, trans.tx_data[0], trans.tx_data[1]);
 
-	ret = spi_device_polling_transmit( spi, &trans );
-//	ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
+
+//	ret = spi_device_polling_transmit( spi, &trans );
+	ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
 	assert( ret == ESP_OK );
 
 //	ret = spi_device_get_trans_result( spi, &rtrans, portMAX_DELAY );
@@ -295,6 +300,7 @@ function:	Clear screen function, refresh the screen to a certain color
 parameter	:
 	  Color :		The color you want to clear all the screen
 ******************************************************************************/
+/*
 void lcd_clear( uint16_t color )
 {
 	uint32_t		i;
@@ -311,7 +317,7 @@ void lcd_clear( uint16_t color )
 		}
 	 }
 }
-
+*/
 /******************************************************************************
 function:	Refresh a certain area to the same color
 parameter	:
@@ -335,6 +341,123 @@ void lcd_clear_window( uint16_t x_start, uint16_t y_start, uint16_t x_end, uint1
 		}
 	} 					  	    
 }
+
+static void send_line_finish(spi_device_handle_t spi)
+{
+    spi_transaction_t *rtrans;
+    esp_err_t ret;
+    //Wait for all 6 transactions to be done and get back the results.
+    for (int x=0; x<6; x++) {
+        ret=spi_device_get_trans_result(spi, &rtrans, portMAX_DELAY);
+        assert(ret==ESP_OK);
+        //We could inspect rtrans now if we received any info back. The LCD is treated as write-only, though.
+    }
+}
+
+static void send_lines(spi_device_handle_t spi, int ypos, uint16_t *linedata)
+{
+	esp_err_t			ret;
+	int				x;
+	static spi_transaction_t	trans[6];
+
+printf( "  [%d] -> {%s} \n", __LINE__, __FUNCTION__ );
+    //In theory, it's better to initialize trans and data only once and hang on to the initialized
+    //variables. We allocate them on the stack, so we need to re-init them each call.
+	for ( x = 0; x < 6; x++ )
+	{
+		memset( &trans[x], 0, sizeof( spi_transaction_t ) );
+		if ( ( x & 1 ) == 0 ) 
+		{
+            //Even transfers are commands
+			trans[x].length = 8;
+			trans[x].user = ( void * )0;
+		}
+		else 
+		{
+            //Odd transfers are data
+			trans[x].length = 8 * 4;
+			trans[x].user= ( void * )1;
+		}
+		trans[x].flags = SPI_TRANS_USE_TXDATA;
+	}
+
+	trans[0].tx_data[0] = 0x2A;           //Column Address Set
+	trans[1].tx_data[0] = 0;              //Start Col High
+	trans[1].tx_data[1] = 0;              //Start Col Low
+	trans[1].tx_data[2] = ( 320 ) >> 8;       //End Col High
+	trans[1].tx_data[3] = ( 320 ) & 0xff;     //End Col Low
+	trans[2].tx_data[0] = 0x2B;           //Page address set
+	trans[3].tx_data[0] = ypos >> 8;        //Start page high
+	trans[3].tx_data[1] = ypos & 0xff;      //start page low
+	trans[3].tx_data[2] = ( ypos + PARALLEL_LINES ) >> 8;    //end page high
+	trans[3].tx_data[3] = ( ypos + PARALLEL_LINES ) & 0xff;  //end page low
+	trans[4].tx_data[0] = 0x2C;           //memory write
+	trans[5].tx_buffer = linedata;        //finally send the line data
+	trans[5].length = 320 * 2 * 8 * PARALLEL_LINES;          //Data length, in bits
+	trans[5].flags = 0; //undo SPI_TRANS_USE_TXDATA flag
+
+printf( "  [%d] -> {%s} \n", __LINE__, __FUNCTION__ );
+    //Queue all transactions.
+	for (x=0; x<6; x++) 
+	{
+		ret = spi_device_queue_trans( spi, &trans[x], portMAX_DELAY );
+		assert( ret == ESP_OK );
+	}
+
+printf( "  %d \n", __LINE__ );
+    //When we are here, the SPI driver is busy (in the background) getting the transactions sent. That happens
+    //mostly using DMA, so the CPU doesn't have much to do here. We're not going to wait for the transaction to
+    //finish because we may as well spend the time calculating the next line. When that is done, we can call
+    //send_line_finish, which will wait for the transfers to be done and check their status.
+}
+
+
+
+void lcd_clear( uint16_t color )
+{
+	uint16_t		*lines;
+	int			frame = 0;
+	int			sending_line = -1;
+	int			calc_line = 0;
+
+printf( "  [%d] -> {%s} %d\n", __LINE__, __FUNCTION__, sizeof( lines ) );
+//	for ( int i = 0; i < 2; i++ )
+//	{
+		lines = heap_caps_malloc( 320 * PARALLEL_LINES * sizeof( uint16_t ), MALLOC_CAP_DMA );
+//		assert( lines[i] != NULL );
+//	}
+
+    //Indexes of the line currently being sent to the LCD and the line we're calculating.
+
+	while( !frame )
+	{
+		frame++;
+		for ( int y = 0; y < 240; y += PARALLEL_LINES )
+		{
+			memset( lines, color, 320 * PARALLEL_LINES * sizeof( uint16_t ) );
+//			pretty_effect_calc_lines( lines[calc_line], y, frame, PARALLEL_LINES );
+            //Finish up the sending process of the previous line, if any
+printf( "  %d %d\n", __LINE__, y );
+			if ( sending_line != -1 )
+				send_line_finish( __spi );
+            //Swap sending_line and calc_line
+			sending_line ++;
+//			calc_line = ( calc_line == 1 ) ? 0: 1;
+printf( "  %d %d\n", __LINE__, y );
+            //Send the line we currently calculated.
+			send_lines( __spi, y, lines );
+printf( "  %d %d\n", __LINE__, y );
+
+            //The line set is queued up for sending now; the actual sending happens in the
+            //background. We can go on to calculate the next line set as long as we do not
+            //touch line[sending_line]; the SPI sending process is still reading from that.
+		}
+	}
+	free( lines );
+//	free( lines[1] );
+}
+
+
 
 /******************************************************************************
 function: Draw a point

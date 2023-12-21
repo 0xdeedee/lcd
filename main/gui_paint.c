@@ -167,7 +167,9 @@ void paint_set_pixel(		uint16_t x_point,
 ******************************************************************************/
 void paint_clear( uint16_t color )
 {
-	lcd_set_window( 0, 0, __paint.width_byte , __paint.height_byte );
+	lcd_clear( color );
+
+/*	lcd_set_window( 0, 0, __paint.width_byte , __paint.height_byte );
 
 	for ( uint16_t y = 0; y < __paint.height_byte; y++ ) 
 	{
@@ -177,6 +179,7 @@ void paint_clear( uint16_t color )
 //			lcd_write_data_word( __spi, color );
 		}
 	}
+*/
 }
 
 /******************************************************************************

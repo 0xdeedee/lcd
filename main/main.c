@@ -68,7 +68,7 @@ void lcd_cmd( spi_device_handle_t spi, const uint8_t cmd, bool keep_cs_active )
  */
 /*
 void lcd_data( spi_device_handle_t spi, const uint8_t *data, int len )
-{
+trans.tx_data[1]{
 	esp_err_t			ret;
 	spi_transaction_t		t;
 
@@ -110,7 +110,7 @@ static void lcd_reset()
 void lcd_init( spi_device_handle_t spi )
 {
 	int			cmd = 0;
-	const lcd_init_cmd_t	*lcd_init_cmds;
+	const lctrans.tx_data[1]d_init_cmd_t	*lcd_init_cmds;
 	gpio_config_t		io_conf = {};
 
 	//Initialize non-SPI GPIOs
@@ -146,7 +146,7 @@ void lcd_init( spi_device_handle_t spi )
 	vTaskDelay( 1000 / portTICK_PERIOD_MS );
 
 	printf( "LCD ST7789V initialization finished!!!\n" );
-}
+trans.tx_data[1]}
 */
 /* To send a set of lines we have to send a command, 2 data bytes, another command, 2 more data bytes and another command
  * before sending the line data itself; a total of 6 transactions. (We can't put all of this in just one transaction
@@ -386,22 +386,40 @@ void app_main(void)
 //	ret = pretty_effect_init();
 //	ESP_ERROR_CHECK( ret );
 
-paint_new_image(LCD_WIDTH, LCD_HEIGHT, 0, WHITE);
-paint_clear(WHITE);
-paint_draw_string(30, 10, "123", &__font_24, YELLOW, RED);
-paint_draw_string(30, 34, "ABC", &__font_24, BLUE, CYAN);
+paint_new_image(LCD_WIDTH, LCD_HEIGHT, 0, ~WHITE);
+paint_clear(~WHITE);
+paint_clear(~BLACK);
+paint_clear(~WHITE);
+//paint_draw_rectangle( 0, 0, 320, 240, WHITE, DOT_PIXEL_8X8, DRAW_FILL_FULL );
+//paint_clear_windows( 0, 0, 320, 240, BLACK );
+printf( "  %d\n", __LINE__ );
+//paint_draw_string(30, 10, "123", &__font_24, YELLOW, RED);
+paint_draw_string(30, 3, "123", &__font_24, ~WHITE, ~BLACK);
+printf( "  %d\n", __LINE__ );
+paint_draw_string(30, 34, "ABC", &__font_24, ~BLUE, ~CYAN);
+printf( "  %d\n", __LINE__ );
 
-paint_draw_rectangle(125, 10, 225, 58, RED,  DOT_PIXEL_2X2,DRAW_FILL_EMPTY);
-paint_draw_line(125, 10, 225, 58, MAGENTA,   DOT_PIXEL_2X2,LINE_STYLE_SOLID);
-paint_draw_line(225, 10, 125, 58, MAGENTA,   DOT_PIXEL_2X2,LINE_STYLE_SOLID);
+paint_draw_rectangle(125, 10, 225, 58, ~RED,  DOT_PIXEL_2X2,DRAW_FILL_EMPTY);
+paint_draw_line(125, 10, 225, 58, ~MAGENTA,   DOT_PIXEL_2X2,LINE_STYLE_SOLID);
+paint_draw_line(225, 10, 125, 58, ~MAGENTA,   DOT_PIXEL_2X2,LINE_STYLE_SOLID);
 
-paint_draw_circle(150,100, 25, BLUE,   DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
-paint_draw_circle(180,100, 25, BLACK,  DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
-paint_draw_circle(210,100, 25, RED,    DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
-paint_draw_circle(165,125, 25, YELLOW, DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
-paint_draw_circle(195,125, 25, GREEN,  DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+paint_draw_circle(150,100, 25, ~BLUE,   DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+paint_draw_circle(180,100, 25, ~BLACK,  DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+paint_draw_circle(210,100, 25, ~RED,    DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+paint_draw_circle(165,125, 25, ~YELLOW, DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
+paint_draw_circle(195,125, 25, ~GREEN,  DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
 
 
+paint_draw_line(0, 2, 320, 2, ~MAGENTA,   DOT_PIXEL_2X2,LINE_STYLE_SOLID);
+paint_draw_line(0, 29, 320, 29, ~MAGENTA,   DOT_PIXEL_2X2,LINE_STYLE_SOLID);
+
+paint_draw_string(30, 3, "234", &__font_24, ~WHITE, ~BLACK);
+paint_draw_string(30, 3, "334", &__font_24, ~WHITE, ~BLACK);
+paint_draw_string(30, 3, "434", &__font_24, ~WHITE, ~BLACK);
+paint_draw_string(30, 3, "534", &__font_24, ~WHITE, ~BLACK);
+paint_draw_string(30, 3, "634", &__font_24, ~WHITE, ~BLACK);
+paint_draw_string(30, 3, "734", &__font_24, ~WHITE, ~BLACK);
+paint_draw_string(30, 3, "834", &__font_24, ~WHITE, ~BLACK);
 
 printf( "  %d\n", __LINE__ );
 	//Go do nice stuff.
