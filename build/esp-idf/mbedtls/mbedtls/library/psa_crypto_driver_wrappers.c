@@ -1,1 +1,0 @@
-/home/deedee/esp/esp-idf_5_2/components/mbedtls/mbedtls/library/psa_crypto_driver_wrappers.c

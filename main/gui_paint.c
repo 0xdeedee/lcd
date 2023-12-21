@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h> //memset()
-#include <math.h>
+//#include <math.h>
 #include "gui_paint.h"
 
 #define ARRAY_LEN		( 50 )
@@ -151,10 +151,8 @@ void paint_set_pixel(		uint16_t x_point,
 			return;
 	}
 
-	//printf("x = %d, y = %d\r\n", X, Y);
 	if ( ( x > __paint.width_memory) || ( y > __paint.height_memory) )
 	{
-		//Debug("Exceeding display boundaries\r\n");
 		return;
 	}
 
@@ -175,7 +173,8 @@ void paint_clear( uint16_t color )
 	{
 		for ( uint16_t x = 0; x < __paint.width_byte; x++ ) 
 		{//8 pixel =  1 byte
-			lcd_write_data_word( color );
+			paint_set_pixel( x, y, color );
+//			lcd_write_data_word( __spi, color );
 		}
 	}
 }
@@ -488,19 +487,25 @@ void paint_draw_char(		uint16_t x_point,
 			if (FONT_BACKGROUND == color_background)
 			{
 				if ( ( *ptr ) & ( 0x80 >> ( column % 8 ) ) )
+				{
+//printf( "  %d %s [%c] %p\n", __LINE__, __FUNCTION__, acsii_char, font );
 					paint_set_pixel ( x_point + column, y_point + page, color_foreground );
+				}
 			}
 			else
 			{
 				if ( ( *ptr ) & ( 0x80 >> ( column % 8 ) ) ) 
 				{
+//printf( "  %d %s [%c] %p\n", __LINE__, __FUNCTION__, acsii_char, font );
 					paint_set_pixel ( x_point + column, y_point + page, color_foreground );
 	        		} 
 				else 
 				{
+//printf( "  %d %s [%c] %p\n", __LINE__, __FUNCTION__, acsii_char, font );
 					paint_set_pixel ( x_point + column, y_point + page, color_background );
 				}
 			}
+//printf( "  %d %s [%c] %p\n", __LINE__, __FUNCTION__, acsii_char, font );
 			//One pixel is 8 bits
 			if ( column % 8 == 7 ) 
 			{
@@ -555,8 +560,9 @@ void paint_draw_string(         uint16_t x_start,
 			x_point = x_start;
 			y_point = y_start;
 		}
-		paint_draw_char( x_point, y_point, * p_string, font, color_background, color_foreground);
-
+//printf( "  %d %s [%s] %p\n", __LINE__, __FUNCTION__, p_string, font );
+		paint_draw_char( x_point, y_point, *p_string, font, color_background, color_foreground);
+//printf( "  %d %s\n", __LINE__, __FUNCTION__ );
 		//The next character of the address
 		p_string ++;
 
@@ -692,7 +698,7 @@ void paint_draw_time(		uint16_t x_start,
     xEnd             ：Image width
     yEnd             : Image height
 ******************************************************************************/
-paint_draw_image(		const uint8_t *image,
+void paint_draw_image(		uint8_t *image,
 				uint16_t x_start,
 				uint16_t y_start,
 				uint16_t x_end,
@@ -701,6 +707,8 @@ paint_draw_image(		const uint8_t *image,
 	int		i;
 	int		j;
 	uint16_t	color;
+	uint8_t		hight;
+	uint8_t		low;
 
 	for ( j = 0; j < x_end; j++ )
 	{
@@ -708,7 +716,9 @@ paint_draw_image(		const uint8_t *image,
 		{
 			if ( ( x_start + i < LCD_WIDTH ) && ( y_start + j < LCD_HEIGHT ) ) //Exceeded part does not display
 			{
-				color = ( image + j * y_end * 2 + i * 2 + 1 ) << 8 | ( image + j * y_end * 2 + i * 2  );
+				hight = image + j * y_end * 2 + i * 2 + 1;
+				low = image + j * y_end * 2 + i * 2;
+				color = ( hight << 8 ) | low;
 				paint_set_pixel( x_start + i, y_start + j, color );
 			}
 		}

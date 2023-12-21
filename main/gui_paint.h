@@ -206,7 +206,7 @@ void paint_draw_time(		uint16_t x_start,
 				uint16_t color_foreground );
 
 //pic
-void paint_draw_image(		const uint8_t *image, 
+void paint_draw_image(		uint8_t *image, 
 				uint16_t x_start, 
 				uint16_t y_start, 
 				uint16_t x_end, 

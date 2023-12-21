@@ -1,0 +1,67 @@
+[1/10] Performing build step for 'bootloader'
+[1/1] cd /Users/deedee/lcd/build/bootloader/esp-idf/esptool_py && /Users/deedee/.espressif/python_env/idf5.3_py3.11_env/bin/python /Users/deedee/esp/esp-idf_5_3/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /Users/deedee/lcd/build/bootloader/bootloader.bin
+Bootloader binary size 0x5230 bytes. 0x2dd0 bytes (36%) free.
+[2/8] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/gui_paint.c.obj
+/Users/deedee/lcd/main/gui_paint.c: In function 'paint_draw_float_num':
+/Users/deedee/lcd/main/gui_paint.c:647:2: warning: #warning "Fic MEEEE !!!!!!!!!11" [-Wcpp]
+  647 | #warning "Fic MEEEE !!!!!!!!!11"
+      |  ^~~~~~~
+/Users/deedee/lcd/main/gui_paint.c: In function 'paint_draw_image':
+/Users/deedee/lcd/main/gui_paint.c:723:39: warning: assignment to 'uint8_t' {aka 'unsigned char'} from 'uint8_t *' {aka 'unsigned char *'} makes integer from pointer without a cast [-Wint-conversion]
+  723 |                                 hight = image + j * y_end * 2 + i * 2 + 1;
+      |                                       ^
+/Users/deedee/lcd/main/gui_paint.c:724:37: warning: assignment to 'uint8_t' {aka 'unsigned char'} from 'uint8_t *' {aka 'unsigned char *'} makes integer from pointer without a cast [-Wint-conversion]
+  724 |                                 low = image + j * y_end * 2 + i * 2;
+      |                                     ^
+[3/8] Linking C static library esp-idf/main/libmain.a
+[4/8] Generating ld/sections.ld
+[5/8] Linking CXX executable spi_master.elf
+[6/8] Generating binary image from built executable
+esptool.py v4.7.dev3
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Generated /Users/deedee/lcd/build/spi_master.bin
+[7/8] cd /Users/deedee/lcd/build/esp-idf/esptool_py && /Users/deedee/.espressif/python_env/idf5.3_py3.11_env/bin/python /Users/deedee/esp/esp-idf_5_3/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /Users/deedee/lcd/build/partition_table/partition-table.bin /Users/deedee/lcd/build/spi_master.bin
+spi_master.bin binary size 0x40a40 bytes. Smallest app partition is 0x100000 bytes. 0xbf5c0 bytes (75%) free.
+[7/8] cd /Users/deedee/esp/esp-idf_5_3/components/esptool_py && /Users/deedee/.espressif/tools/cmake/3.24.0/CMake.app/Contents/bin/cmake -D IDF_PATH=/Users/deedee/esp/esp-idf_5_3 -D "SERIAL_TOOL=/Users/deedee/.espressif/python_env/idf5.3_py3.11_env/bin/python;;/Users/deedee/esp/esp-idf_5_3/components/esptool_py/esptool/esptool.py;--chip;esp32s3" -D "SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args" -D WORKING_DIRECTORY=/Users/deedee/lcd/build -P /Users/deedee/esp/esp-idf_5_3/components/esptool_py/run_serial_tool.cmake
+esptool.py --chip esp32s3 -p /dev/cu.usbserial-1130 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size 2MB 0x0 bootloader/bootloader.bin 0x10000 spi_master.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.7.dev3
+Serial port /dev/cu.usbserial-1130
+Connecting....
+Chip is ESP32-S3 (QFN56) (revision v0.1)
+Features: WiFi, BLE
+Crystal is 40MHz
+MAC: f4:12:fa:41:a6:04
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00000000 to 0x00005fff...
+Flash will be erased from 0x00010000 to 0x00050fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Compressed 21040 bytes to 13060...
+Writing at 0x00000000... (100 %)
+Wrote 21040 bytes (13060 compressed) at 0x00000000 in 0.7 seconds (effective 252.4 kbit/s)...
+Hash of data verified.
+Compressed 264768 bytes to 134379...
+Writing at 0x00010000... (11 %)
+Writing at 0x0001d0a1... (22 %)
+Writing at 0x00027297... (33 %)
+Writing at 0x0002d37a... (44 %)
+Writing at 0x0003371c... (55 %)
+Writing at 0x0003a26c... (66 %)
+Writing at 0x000403d8... (77 %)
+Writing at 0x00047cb9... (88 %)
+Writing at 0x0004f1c5... (100 %)
+Wrote 264768 bytes (134379 compressed) at 0x00010000 in 3.9 seconds (effective 543.0 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 103...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.1 seconds (effective 307.2 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...

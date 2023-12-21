@@ -11,22 +11,14 @@
 #include "lcd_driver.h"
 #include "gui_paint.h"
 
-//#include "pretty_effect.h"
+#include "st_2_inch/fonts.h"
+
+#include "st_2_inch/font24.h"
+
+
+extern spi_device_handle_t             __spi;
 
 /*
- This code displays some fancy graphics on the 320x240 LCD on an ESP-WROVER_KIT board.
- This example demonstrates the use of both spi_device_transmit as well as
- spi_device_queue_trans/spi_device_get_trans_result and pre-transmit callbacks.
-
- Some info about the ILI9341/ST7789V: It has an C/D line, which is connected to a GPIO here. It expects this
- line to be low for a command and high for data. We use a pre-transmit callback here to control that
- line: every transaction has as the user-definable argument the needed state of the D/C line and just
- before the transaction is sent, the callback will set this line to the correct state.
-*/
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////// Please update the following configuration according to your HardWare spec /////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define LCD_HOST		( SPI2_HOST )
 
 #define PIN_NUM_MISO		( 41 )		// unused, display is write only 
@@ -38,27 +30,16 @@
 #define PIN_NUM_RST		( 48 )
 #define PIN_NUM_BCKL		( 47 )
 
-//#define LCD_BK_LIGHT_ON_LEVEL   ( 0 )
-
-//To speed up transfers, every SPI transfer sends a bunch of lines. This define specifies how many. More means more memory use,
-//but less overhead for setting up / finishing transfers. Make sure 240 is dividable by this.
 #define PARALLEL_LINES		( 16 )
-
-/*
- The LCD needs a bunch of command/argument values to be initialized. They are stored in this struct.
-typedef struct {
-    uint8_t cmd;
-    uint8_t data[16];
-    uint8_t databytes; //No of data in data; bit 7 = delay after set; 0xFF = end of cmds.
-} lcd_init_cmd_t;
-
 */
+
 typedef enum {
     LCD_TYPE_ILI = 1,
     LCD_TYPE_ST,
     LCD_TYPE_MAX,
 } type_lcd_t;
 
+/*
 void lcd_cmd( spi_device_handle_t spi, const uint8_t cmd, bool keep_cs_active )
 {
 	esp_err_t			ret;
@@ -76,6 +57,7 @@ void lcd_cmd( spi_device_handle_t spi, const uint8_t cmd, bool keep_cs_active )
 	ret = spi_device_polling_transmit( spi, &t );			//Transmit!
 	assert( ret == ESP_OK );					//Should have had no issues.
 }
+*/
 
 /* Send data to the LCD. Uses spi_device_polling_transmit, which waits until the
  * transfer is complete.
@@ -84,6 +66,7 @@ void lcd_cmd( spi_device_handle_t spi, const uint8_t cmd, bool keep_cs_active )
  * mode for higher speed. The overhead of interrupt transactions is more than
  * just waiting for the transaction to complete.
  */
+/*
 void lcd_data( spi_device_handle_t spi, const uint8_t *data, int len )
 {
 	esp_err_t			ret;
@@ -101,16 +84,17 @@ void lcd_data( spi_device_handle_t spi, const uint8_t *data, int len )
 	ret = spi_device_polling_transmit( spi, &t );			//Transmit!
 	assert( ret == ESP_OK );					//Should have had no issues.
 }
-
+*/
 //This function is called (in irq context!) just before a transmission starts. It will
 //set the D/C line to the value indicated in the user field.
+/*
 void lcd_spi_pre_transfer_callback( spi_transaction_t *t )
 {
 	int				dc = ( int )t->user;
 
 	gpio_set_level( PIN_NUM_DC, dc );
 }
-
+*/
 /*
 static void lcd_reset()
 {
@@ -367,6 +351,7 @@ printf( "  %d\n", __LINE__ );
 */
 void app_main(void)
 {
+/*
 	esp_err_t				ret;
 	spi_device_handle_t			spi;
 	spi_bus_config_t			buscfg = {
@@ -389,17 +374,14 @@ void app_main(void)
 	//Initialize the SPI bus
 	ret = spi_bus_initialize( LCD_HOST, &buscfg, SPI_DMA_CH_AUTO );
 	ESP_ERROR_CHECK( ret );
-
-printf( "  %d\n", __LINE__ );
+*/
 	//Attach the LCD to the SPI bus
-	ret = spi_bus_add_device( LCD_HOST, &devcfg, &spi);
-	ESP_ERROR_CHECK( ret );
-
-printf( "  %d\n", __LINE__ );
+//	ret = spi_bus_add_device( LCD_HOST, &devcfg, &spi);
+//	ESP_ERROR_CHECK( ret );
+	lcd_init_device();
 	//Initialize the LCD
-	lcd_init( spi );
+	lcd_init();
 
-printf( "  %d\n", __LINE__ );
 	//Initialize the effect displayed
 //	ret = pretty_effect_init();
 //	ESP_ERROR_CHECK( ret );
@@ -423,7 +405,7 @@ paint_draw_circle(195,125, 25, GREEN,  DOT_PIXEL_2X2,   DRAW_FILL_EMPTY);
 
 printf( "  %d\n", __LINE__ );
 	//Go do nice stuff.
-//	display_pretty_colors( spi );
+//	display_pretty_colors( __spi );
 }
 
 

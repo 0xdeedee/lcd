@@ -24,7 +24,7 @@ typedef struct __s_font {
 	uint16_t		height;
 } __s_font_t;
 
-
+/*
 #if (1 == __FONT_8_ENABLED__ )
 	#include "font8.h"
 #endif // __FONT_8_ENABLED__
@@ -45,7 +45,7 @@ typedef struct __s_font {
 	#include "font24.h"
 #endif // __FONT_24_ENABLED__
 
-
+*/
 
 #endif // __FONTS_H__
  

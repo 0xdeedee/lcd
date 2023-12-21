@@ -3,7 +3,23 @@
 #include "lcd_driver.h"
 
 
+#define LCD_HOST                ( SPI2_HOST )
+
+#define PIN_NUM_MISO            ( 41 )          // unused, display is write only 
+#define PIN_NUM_MOSI            ( 21 )          
+#define PIN_NUM_CLK             ( 20 )          
+#define PIN_NUM_CS              ( 19 )          
+                                
+#define PIN_NUM_DC              ( 45 )
+#define PIN_NUM_RST             ( 48 )
+#define PIN_NUM_BCKL            ( 47 )
+                                
+#define PARALLEL_LINES          ( 16 )
+
 #define LCD_CTRL_BITMASK        ( ( 1ULL << PIN_NUM_DC ) | ( 1ULL << PIN_NUM_RST ) | ( 1ULL << PIN_NUM_BCKL ) )
+
+spi_device_handle_t		__spi;
+
 
 DRAM_ATTR static const lcd_init_cmd_t			st_init_cmds[] = {
 	// Memory Data Access Control, MX=MV=1, MY=ML=MH=0, RGB=0
@@ -85,7 +101,7 @@ static void lcd_reset()
 	vTaskDelay( 100 / portTICK_PERIOD_MS );                         
 }
 
-void lcd_init( spi_device_handle_t spi )
+void lcd_init()
 {
 	int			cmd = 0;
 	const lcd_init_cmd_t	*lcd_init_cmds;
@@ -107,8 +123,8 @@ void lcd_init( spi_device_handle_t spi )
 	//Send all the commands
 	while ( lcd_init_cmds[cmd].databytes != 0xff )
 	{
-		lcd_cmd( spi, lcd_init_cmds[cmd].cmd, false );
-		lcd_data( spi, lcd_init_cmds[cmd].data, lcd_init_cmds[cmd].databytes & 0x1F );
+		lcd_cmd( __spi, lcd_init_cmds[cmd].cmd, false );
+		lcd_data( __spi, lcd_init_cmds[cmd].data, lcd_init_cmds[cmd].databytes & 0x1F );
 		if ( lcd_init_cmds[cmd].databytes & 0x80 )
 		{
 			vTaskDelay( 100 / portTICK_PERIOD_MS );
@@ -127,22 +143,63 @@ void lcd_init( spi_device_handle_t spi )
 }
 
 
+void lcd_spi_pre_transfer_callback( spi_transaction_t *t )
+{
+	int		dc = ( int )t->user;
+
+	gpio_set_level( PIN_NUM_DC, dc );
+}
+
+void lcd_init_device()
+{
+        esp_err_t                               ret;
+        spi_bus_config_t                        buscfg = {
+                                .miso_io_num = PIN_NUM_MISO,
+                                .mosi_io_num = PIN_NUM_MOSI,
+                                .sclk_io_num = PIN_NUM_CLK,
+                                .quadwp_io_num = -1,
+                                .quadhd_io_num = -1,
+                                .max_transfer_sz = PARALLEL_LINES * 320 * 2 + 8
+                        };
+        spi_device_interface_config_t           devcfg = {
+                              .clock_speed_hz = 26 * 1000 * 1000,     //Clock out at 26 MHz
+//                                .clock_speed_hz = 10 * 1000 * 1000,     //Clock out at 10 MHz
+                                .mode = 0,                              //SPI mode 0
+                                .spics_io_num = PIN_NUM_CS,             //CS pin
+                                .queue_size = 7,                        //We want to be able to queue 7 transactions at a time
+                                .pre_cb = lcd_spi_pre_transfer_callback, //Specify pre-transfer callback to handle D/C line
+                        };
+
+        //Initialize the SPI bus
+        ret = spi_bus_initialize( LCD_HOST, &buscfg, SPI_DMA_CH_AUTO );
+        ESP_ERROR_CHECK( ret );
+
+        //Attach the LCD to the SPI bus
+        ret = spi_bus_add_device( LCD_HOST, &devcfg, &__spi);
+        ESP_ERROR_CHECK( ret );
+
+
+
+}
+
+
 static void lcd_write_command( spi_device_handle_t spi, uint8_t data )
 {
         esp_err_t                       ret;
         static spi_transaction_t        trans;
         static spi_transaction_t        *rtrans;
 
+	memset( &trans, 0, sizeof( trans ) );
         trans.length = 8;
         trans.user = (void*)0;
-        trans.flags = 0;
-        trans.tx_data[0] = data;
+        trans.flags = SPI_TRANS_USE_TXDATA;
+	trans.tx_data[0]        = data;
 
-        ret = spi_device_queue_trans(spi, &trans, portMAX_DELAY);
+        ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
         assert(ret == ESP_OK);
 
-        ret = spi_device_get_trans_result(spi, &rtrans, portMAX_DELAY);
-        assert(ret == ESP_OK);
+//	ret = spi_device_get_trans_result( spi, &rtrans, portMAX_DELAY);
+//        assert(ret == ESP_OK);
 }
 
 static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
@@ -153,17 +210,17 @@ static void lcd_write_data_byte( spi_device_handle_t spi, uint8_t data )
 
 	trans.length		= 8;
 	trans.user		= ( void * )1;
-	trans.flags		= 0;
+	trans.flags		= SPI_TRANS_USE_TXDATA;
 	trans.tx_data[0]	= data;
 
 	ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
 	assert( ret == ESP_OK );
 
-	ret = spi_device_get_trans_result( spi, &rtrans, portMAX_DELAY );
-	assert( ret == ESP_OK );
+//	ret = spi_device_get_trans_result( spi, &rtrans, portMAX_DELAY );
+//	assert( ret == ESP_OK );
 }
 
-void lcd_write_data_word( spi_device_handle_t spi, uint16_t data )
+static void lcd_write_data_word( spi_device_handle_t spi, uint16_t data )
 {
 	esp_err_t			ret;
 	static spi_transaction_t	trans;
@@ -171,15 +228,16 @@ void lcd_write_data_word( spi_device_handle_t spi, uint16_t data )
 
 	trans.length		= 16;
 	trans.user		= ( void * )1;
-	trans.flags		= 0;
+	trans.flags		= SPI_TRANS_USE_TXDATA;
 	trans.tx_data[0]	= data >> 8;
 	trans.tx_data[0]	= data & 0xFF;
 
-	ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
+	ret = spi_device_polling_transmit( spi, &trans );
+//	ret = spi_device_queue_trans( spi, &trans, portMAX_DELAY );
 	assert( ret == ESP_OK );
 
-	ret = spi_device_get_trans_result( spi, &rtrans, portMAX_DELAY );
-	assert( ret == ESP_OK );
+//	ret = spi_device_get_trans_result( spi, &rtrans, portMAX_DELAY );
+//	assert( ret == ESP_OK );
 }
 
 
@@ -191,21 +249,21 @@ parameter	:
 	  Xend  :	End UWORD coordinates
 	  Yend  :	End UWORD coordinatesen
 ******************************************************************************/
-void lcd_set_window( uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end );
+void lcd_set_window( uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end )
 { 
-	lcd_write_command( 0x2a );
-	lcd_write_data_byte( 0x00 );
-	lcd_write_data_byte( x_start & 0xff );
-	lcd_write_data_byte( ( x_end - 1 ) >> 8 );
-	lcd_write_data_byte( ( x_end - 1 ) & 0xff );
+	lcd_write_command( __spi, 0x2a );
+	lcd_write_data_byte( __spi, 0x00 );
+	lcd_write_data_byte( __spi, x_start & 0xff );
+	lcd_write_data_byte( __spi, ( x_end - 1 ) >> 8 );
+	lcd_write_data_byte( __spi, ( x_end - 1 ) & 0xff );
 
-	lcd_write_command( 0x2b );
-	lcd_write_data_byte( 0x00 );
-	lcd_write_data_byte( y_start & 0xff );
-	lcd_write_data_byte( ( y_end - 1 ) >> 8 );
-	lcd_write_data_byte( ( y_end - 1 ) & 0xff );
+	lcd_write_command( __spi, 0x2b );
+	lcd_write_data_byte( __spi, 0x00 );
+	lcd_write_data_byte( __spi, y_start & 0xff );
+	lcd_write_data_byte( __spi, ( y_end - 1 ) >> 8 );
+	lcd_write_data_byte( __spi, ( y_end - 1 ) & 0xff );
 
-	lcd_write_command( 0x2C );
+	lcd_write_command( __spi, 0x2C );
 }
 
 /******************************************************************************
@@ -216,20 +274,20 @@ parameter	:
 
 ******************************************************************************/
 void lcd_set_cursor( uint16_t x, uint16_t y )
-{ 
-	lcd_write_command( 0x2a );
-	lcd_write_data_byte( x >> 8 );
-	lcd_write_data_byte( x );
-	lcd_write_data_byte( x >> 8 );
-	lcd_write_data_byte( x );
+{
+	lcd_write_command( __spi, 0x2a );
+	lcd_write_data_byte( __spi, x >> 8 );
+	lcd_write_data_byte( __spi, x );
+	lcd_write_data_byte( __spi, x >> 8 );
+	lcd_write_data_byte( __spi, x );
 
-	lcd_write_command( 0x2b );
-	lcd_write_data_byte( y >> 8 );
-	lcd_write_data_byte( y );
-	lcd_write_data_byte( y >> 8 );
-	lcd_write_data_byte( y );
+	lcd_write_command( __spi, 0x2b );
+	lcd_write_data_byte( __spi, y >> 8 );
+	lcd_write_data_byte( __spi, y );
+	lcd_write_data_byte( __spi, y >> 8 );
+	lcd_write_data_byte( __spi, y );
 
-	lcd_write_command( 0x2C );
+	lcd_write_command( __spi, 0x2C );
 }
 
 /******************************************************************************
@@ -242,14 +300,14 @@ void lcd_clear( uint16_t color )
 	uint32_t		i;
 	uint32_t		j;  	
 
-	LCD_SetWindow( 0, 0, LCD_WIDTH, LCD_HEIGHT );
-	DEV_Digital_Write( DEV_DC_PIN, 1 );
+	lcd_set_window( 0, 0, LCD_WIDTH, LCD_HEIGHT );
+	gpio_set_level( PIN_NUM_DC, 1 );
 	for( i = 0; i < LCD_WIDTH; i++ )
 	{
 		for( j = 0; j < LCD_HEIGHT; j++ )
 		{
-			lcd_write_data_byte( ( color >> 8 ) & 0xff );
-			lcd_write_data_byte( color );
+			lcd_write_data_byte( __spi, ( color >> 8 ) & 0xff );
+			lcd_write_data_byte( __spi, color );
 		}
 	 }
 }
@@ -273,7 +331,7 @@ void lcd_clear_window( uint16_t x_start, uint16_t y_start, uint16_t x_end, uint1
 	{													   	 	
 		for( j = x_start; j <= x_end - 1; j++ )
 		{
-			lcd_write_data_word( color );
+			lcd_write_data_word( __spi, color );
 		}
 	} 					  	    
 }
@@ -288,7 +346,7 @@ parameter	:
 void lcd_draw_paint( uint16_t x, uint16_t y, uint16_t color )
 {
 	lcd_set_cursor( x, y );
-	lcd_write_data_word( color );
+	lcd_write_data_word( __spi, color );
 }
 
 

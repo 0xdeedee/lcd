@@ -1,4 +1,4 @@
-/* * Data converted from /home/deedee/devel/lcd/main/image.jpg
+/* * Data converted from /Users/deedee/lcd/main/image.jpg
  */
 .data
 .section .rodata.embedded
