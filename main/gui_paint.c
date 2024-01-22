@@ -14,31 +14,14 @@
 //#include <math.h>
 #include "gui_paint.h"
 
-#define ARRAY_LEN		( 50 )
+#define ARRAY_LEN		( 10 )
 
 volatile paint_t	__paint;
 
-/******************************************************************************
-  function: Create Image
-  parameter:
-    image   :   Pointer to the image cache
-    width   :   The width of the picture
-    Height  :   The height of the picture
-    color   :   Whether the picture is inverted
-******************************************************************************/
-void paint_new_image(		uint16_t width,
-				uint16_t height,
-				uint16_t rotate,
-				uint16_t color )
+static void __set_rotate_dimentions(	rotate_image_t rotate,
+					uint16_t width,
+					uint16_t height )
 {
-	__paint.width_memory = width;
-	__paint.height_memory = height;
-	__paint.color = color;
-	__paint.width_byte = width;
-	__paint.height_byte = height;
-	__paint.rotate = rotate;
-	__paint.mirror = MIRROR_NONE;
-
 	if ( ( rotate == ROTATE_0 ) || ( rotate == ROTATE_180) ) 
 	{
 		__paint.width = width;
@@ -51,26 +34,29 @@ void paint_new_image(		uint16_t width,
 	}
 }
 
+void paint_new_image(		uint16_t width,
+				uint16_t height,
+				rotate_image_t rotate,
+				uint16_t color )
+{
+	__paint.width	= width;
+	__paint.height	= height;
+	__paint.color	= color;
+	__paint.rotate	= rotate;
+	__paint.mirror	= MIRROR_NONE;
+	__set_rotate_dimentions( __paint.rotate, __paint.width, __paint.height );
+}
+
+
 /******************************************************************************
   function: Select Image Rotate
   parameter:
     Rotate   :   0,90,180,270
 ******************************************************************************/
-void paint_set_rotate( uint16_t rotate )
+void paint_set_rotate( rotate_image_t rotate )
 {
-	if (		( rotate == ROTATE_0 ) 
-		|| 	( rotate == ROTATE_90 ) 
-		||	( rotate == ROTATE_180 ) 
-		||	( rotate == ROTATE_270) ) 
-	{
-		//Debug("Set image Rotate %d\r\n", Rotate);
-		__paint.rotate = rotate;
-	}
-	else 
-	{
-		//Debug("rotate = 0, 90, 180, 270\r\n");
-		//  exit(0);
-	}
+	__paint.rotate = rotate;
+	__set_rotate_dimentions( __paint.rotate, __paint.width, __paint.height );
 }
 
 /******************************************************************************
@@ -107,10 +93,22 @@ void paint_set_pixel(		uint16_t x_point,
 	uint16_t		x;
 	uint16_t		y;
 
-	if ( ( x_point > __paint.width ) || ( y_point > __paint.height ) ) 
+	if ( ( __paint.rotate == ROTATE_0 ) || ( __paint.rotate == ROTATE_180 ) )
 	{
-		//Debug("Exceeding display boundaries\r\n");
-		return;
+		if ( ( x_point > __paint.width ) || ( y_point > __paint.height ) ) 
+		{
+			//Debug("Exceeding display boundaries\r\n");
+			printf( "{%s}{%d} \n", __FUNCTION__, __LINE__ );
+			return;
+		}
+	}
+	else 
+	{	
+		if ( ( x_point > __paint.width ) || ( y_point > __paint.height ) )
+		{
+			printf( "{%s}{%d} %d:%d [%d:%d]\n", __FUNCTION__, __LINE__, x_point, y_point, __paint.height, __paint.width );
+			return;
+		}
 	}
 
 	switch (__paint.rotate) {
@@ -119,16 +117,16 @@ void paint_set_pixel(		uint16_t x_point,
 				y = y_point;
 			break;
 		case 90:
-				x = __paint.width_memory - y_point - 1;
+				x = __paint.width - y_point - 1;
 				y = x_point;
 			break;
 		case 180:
-				x = __paint.width_memory - x_point - 1;
-				y = __paint.height_memory - y_point - 1;
+				x = __paint.width - x_point - 1;
+				y = __paint.height - y_point - 1;
 			break;
 		case 270:
 				x = y_point;
-				y = __paint.height_memory - x_point - 1;
+				y = __paint.width - x_point - 1;
 			break;
 		default:
 			return;
@@ -138,25 +136,36 @@ void paint_set_pixel(		uint16_t x_point,
 		case MIRROR_NONE:
 			break;
 		case MIRROR_HORIZONTAL:
-				x = __paint.width_memory - x - 1;
+				x = __paint.width - x - 1;
 			break;
 		case MIRROR_VERTICAL:
-				y = __paint.height_memory - y - 1;
+				y = __paint.height - y - 1;
 			break;
 		case MIRROR_ORIGIN:
-				x = __paint.width_memory - x - 1;
-				y = __paint.height_memory - y - 1;
+				x = __paint.width - x - 1;
+				y = __paint.height - y - 1;
 			break;
 		default:
 			return;
 	}
 
-	if ( ( x > __paint.width_memory) || ( y > __paint.height_memory) )
+	if ( ( __paint.rotate == ROTATE_0 ) || ( __paint.rotate == ROTATE_180 ) )
 	{
-		return;
+		if ( ( x > __paint.width ) || ( y > __paint.height ) )
+		{
+			printf( "{%s}{%d} \n", __FUNCTION__, __LINE__ );
+			return;
+		}
+	}
+	else
+	{
+		if ( ( x > __paint.height ) || ( y > __paint.width ) )
+		{
+			printf( "{%s}{%d} \n", __FUNCTION__, __LINE__ );
+			return;
+		}
 	}
 
-	// UDOUBLE Addr = X / 8 + Y * __paint.widthByte;
 	lcd_draw_paint( x, y, color );
 }
 
@@ -474,7 +483,7 @@ void paint_draw_char(		uint16_t x_point,
 
 	if ( ( x_point > __paint.width ) || ( y_point > __paint.height ) )
 	{
-		//Debug("paint_draw_char Input exceeds the normal display range\r\n");
+		printf( "paint_draw_char Input exceeds the normal display range\r\n");
 		return;
 	}
 
@@ -542,9 +551,10 @@ void paint_draw_string(         uint16_t x_start,
 	uint16_t		x_point = x_start;
 	uint16_t		y_point = y_start;
 
+	printf( "{%s}{%d} %s\n", __FUNCTION__, __LINE__, p_string );
 	if ( ( x_start > __paint.width ) || ( y_start > __paint.height ) ) 
 	{
-		//Debug("paint_draw_string Input exceeds the normal display range\r\n");
+		printf( "paint_draw_string Input exceeds the normal display range\r\n");
 		return;
 	}
 
@@ -642,7 +652,7 @@ void paint_draw_float_num(	uint16_t x_point,
 				uint16_t color_foreground )
 {
 	char			str[ARRAY_LEN] = {0};
-	char			*pstr = NULL;
+/*	char			*pstr = NULL;
 #warning "Fic MEEEE !!!!!!!!!11"
 //	dtostrf( nummber, 0, decimal_point + 2, str );
 	pstr = ( char * )malloc( ( strlen( str ) ) * sizeof( char ) );
@@ -655,11 +665,13 @@ void paint_draw_float_num(	uint16_t x_point,
 	{
 		*( pstr + strlen( str ) - 3 ) = '\0';
 	}
-
+*/
+	snprintf( str, ARRAY_LEN - 1, "%.4f", nummber );
 	//show
-	paint_draw_string( x_point, y_point, ( const char * )pstr, font, color_foreground, color_background );
-	free( pstr );
-	pstr = NULL;
+	printf( "{%s}{%d} %s\n", __FUNCTION__, __LINE__, str );
+	paint_draw_string( x_point, y_point, ( const char * )str, font, color_background, color_foreground );
+//	free( pstr );
+//	pstr = NULL;
 }
 
 /******************************************************************************

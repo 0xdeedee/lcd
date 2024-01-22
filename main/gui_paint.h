@@ -13,24 +13,21 @@ typedef struct {
 	uint8_t		*image;
 	uint16_t	width;
 	uint16_t	height;
-	uint16_t	width_memory;
-	uint16_t	height_memory;
 	uint16_t	color;
 	uint16_t	rotate;
 	uint16_t	mirror;
-	uint16_t	width_byte;
-	uint16_t	height_byte;
 } paint_t;
 extern volatile paint_t		__paint;
 
 /**
  * Display rotate
 **/
-#define ROTATE_0			( 0 )
-#define ROTATE_90			( 90 )
-#define ROTATE_180			( 180 )
-#define ROTATE_270			( 270 )
-
+typedef enum {
+	ROTATE_0	= ( 0 ),
+	ROTATE_90	= ( 90 ),
+	ROTATE_180	= ( 180 ),
+	ROTATE_270	= ( 270 ),
+} rotate_image_t;
 /**
  * Display Flip
 **/
@@ -129,10 +126,10 @@ extern paint_time_t __paint_time;
 //init and Clear
 void paint_new_image(		uint16_t width, 
 				uint16_t height, 
-				uint16_t rotate, 
+				rotate_image_t rotate, 
 				uint16_t color );
 void paint_select_image(	uint8_t *image );
-void paint_set_rotate(		uint16_t rotate);
+void paint_set_rotate(		rotate_image_t rotate);
 void paint_set_mirroring(	uint8_t mirror );
 void paint_set_pixel(		uint16_t x_point, 
 				uint16_t y_point, 

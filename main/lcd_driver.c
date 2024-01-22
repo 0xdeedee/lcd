@@ -360,7 +360,7 @@ static void send_lines(spi_device_handle_t spi, int ypos, uint16_t *linedata)
 	int				x;
 	static spi_transaction_t	trans[6];
 
-printf( "  [%d] -> {%s} \n", __LINE__, __FUNCTION__ );
+//printf( "  [%d] -> {%s} \n", __LINE__, __FUNCTION__ );
     //In theory, it's better to initialize trans and data only once and hang on to the initialized
     //variables. We allocate them on the stack, so we need to re-init them each call.
 	for ( x = 0; x < 6; x++ )
@@ -396,7 +396,7 @@ printf( "  [%d] -> {%s} \n", __LINE__, __FUNCTION__ );
 	trans[5].length = 320 * 2 * 8 * PARALLEL_LINES;          //Data length, in bits
 	trans[5].flags = 0; //undo SPI_TRANS_USE_TXDATA flag
 
-printf( "  [%d] -> {%s} \n", __LINE__, __FUNCTION__ );
+//printf( "  [%d] -> {%s} \n", __LINE__, __FUNCTION__ );
     //Queue all transactions.
 	for (x=0; x<6; x++) 
 	{
@@ -404,7 +404,7 @@ printf( "  [%d] -> {%s} \n", __LINE__, __FUNCTION__ );
 		assert( ret == ESP_OK );
 	}
 
-printf( "  %d \n", __LINE__ );
+//printf( "  %d \n", __LINE__ );
     //When we are here, the SPI driver is busy (in the background) getting the transactions sent. That happens
     //mostly using DMA, so the CPU doesn't have much to do here. We're not going to wait for the transaction to
     //finish because we may as well spend the time calculating the next line. When that is done, we can call
@@ -420,7 +420,7 @@ void lcd_clear( uint16_t color )
 	int			sending_line = -1;
 	int			calc_line = 0;
 
-printf( "  [%d] -> {%s} %d\n", __LINE__, __FUNCTION__, sizeof( lines ) );
+//printf( "  [%d] -> {%s} %d\n", __LINE__, __FUNCTION__, sizeof( lines ) );
 //	for ( int i = 0; i < 2; i++ )
 //	{
 		lines = heap_caps_malloc( 320 * PARALLEL_LINES * sizeof( uint16_t ), MALLOC_CAP_DMA );
@@ -437,16 +437,16 @@ printf( "  [%d] -> {%s} %d\n", __LINE__, __FUNCTION__, sizeof( lines ) );
 			memset( lines, color, 320 * PARALLEL_LINES * sizeof( uint16_t ) );
 //			pretty_effect_calc_lines( lines[calc_line], y, frame, PARALLEL_LINES );
             //Finish up the sending process of the previous line, if any
-printf( "  %d %d\n", __LINE__, y );
+//printf( "  %d %d\n", __LINE__, y );
 			if ( sending_line != -1 )
 				send_line_finish( __spi );
             //Swap sending_line and calc_line
 			sending_line ++;
 //			calc_line = ( calc_line == 1 ) ? 0: 1;
-printf( "  %d %d\n", __LINE__, y );
+//printf( "  %d %d\n", __LINE__, y );
             //Send the line we currently calculated.
 			send_lines( __spi, y, lines );
-printf( "  %d %d\n", __LINE__, y );
+//printf( "  %d %d\n", __LINE__, y );
 
             //The line set is queued up for sending now; the actual sending happens in the
             //background. We can go on to calculate the next line set as long as we do not
